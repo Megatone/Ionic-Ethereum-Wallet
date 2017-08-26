@@ -2,3 +2,8 @@
 .list-inset .item.item-input input{
     padding-right:0 !important;
 }
+
+.toggle{
+    height: 48px;
+    border: 0;
+}

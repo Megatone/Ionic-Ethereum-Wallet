@@ -1,21 +1,23 @@
 
-app.controller('ConfigurationController', function ($scope, $rootScope, localStorageService) {
-  localStorageService.setPrefix('ConfigurationStorage');
-  $rootScope.Wallet = null;
+app.controller('ConfigurationController', function ($scope, $rootScope, localStorageService, $state, WalletService) {
 
   $scope.Settings = {
-    PrivateKey: '0x0123456789012345678901234567890123456789012345678901234567890123'
+    PrivateKey: '',
+    AutoOpen: true
   };
 
+  inicializar();
+
+  function inicializar() {
+    $scope.Settings = angular.copy($rootScope.Settings);
+  };
 
 
   $scope.saveConfiguration = function () {
-    setItem('PrivateKey' , $scope.Settings.PrivateKey);
+    setItem('Settings', $scope.Settings);
+    $rootScope.Settings = getItem("Settings");
+    console.log($rootScope.Settings);
   };
-
-    $scope.getConfiguration = function(){
-      alert(getItem("PrivateKey"));
-    };
 
   function setItem(key, val) {
     return localStorageService.set(key, val);
@@ -24,4 +26,9 @@ app.controller('ConfigurationController', function ($scope, $rootScope, localSto
   function getItem(key) {
     return localStorageService.get(key);
   };
+  function removeItem(key) {
+    return localStorageService.remove(key);
+  }
+
+
 });
