@@ -3,24 +3,31 @@
     "version": "0.0.1",
     "description": "An Ionic project",
     "devDependencies": {
-        "@ionic/cli-plugin-cordova": "1.6.2",
+        "@ionic/cli-plugin-cordova": "^1.4.1",
         "@ionic/cli-plugin-gulp": "1.1.1",
         "@ionic/cli-plugin-ionic1": "2.1.1",
-        "gulp": "^3.5.6",
-        "gulp-clean-css": "^3.7.0",
-        "gulp-rename": "^1.2.0",
-        "gulp-sass": "^3.1.0"
-    },
-    "main": "gulpfile.js",
-    "dependencies": {
-        "cordova": "^7.0.1",
         "cordova-android": "^6.2.3",
-        "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-sim": "^1.3.3",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.1",
         "cordova-plugin-whitelist": "^1.3.1",
+        "gulp": "^3.5.6",
+        "gulp-clean-css": "^3.7.0",
+        "gulp-rename": "^1.2.0",
+        "gulp-sass": "^3.1.0",
+        "ionic": "^3.4.0",
         "ionic-plugin-keyboard": "^2.2.1"
+    },
+    "main": "gulpfile.js",
+    "dependencies": {
+        "cordova-plugin-console": "^1.0.7",
+        "cordova-android": "~6.2.3",
+        "cordova-plugin-device": "1.1.4",
+        "cordova-plugin-splashscreen": "~4.0.1",
+        "cordova-plugin-statusbar": "2.2.1",
+        "cordova-plugin-whitelist": "1.3.1",
+        "ionic-plugin-keyboard": "~2.2.1"
     },
     "scripts": {
         "start": "ionic serve"
@@ -37,12 +44,12 @@
     "homepage": "https://github.com/Megatone/Ionic-Ethereum-Wallet#readme",
     "cordova": {
         "plugins": {
-            "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {}
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-console": {}
         },
         "platforms": [
             "android"
