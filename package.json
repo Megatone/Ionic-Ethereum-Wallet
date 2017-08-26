@@ -15,7 +15,7 @@
     "cordova": "^7.0.1"
   },
   "scripts": {
-    "start": "node server/server.js"
+    "start": "ionic serve"
   },
   "repository": {
     "type": "git",
