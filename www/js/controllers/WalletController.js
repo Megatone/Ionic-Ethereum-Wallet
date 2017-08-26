@@ -1,3 +1,3 @@
-app.controller('WalletController', function($scope) {
-
+app.controller('WalletController', function($scope , $rootScope) {
+    $rootScope.Wallet = null;
 });

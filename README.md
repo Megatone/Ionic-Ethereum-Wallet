@@ -13,7 +13,8 @@ These instructions will get you a copy of the project up and running on your loc
 1. `git clone https://github.com/Megatone/Ionic-Ethereum-Wallet`
 2. `cd Ionic-Ethereum-Wallet`
 3. `npm i --save`
-4. `npm start` or `ionic serve`
+4. Open App on Web Browser run `npm start` or `ionic serve`
+5. Compile and run on Android Emulator `ionic cordova emulate android`
 
 
 

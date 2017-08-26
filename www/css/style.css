@@ -1,1 +1,4 @@
 /* Empty. Add your own CSS if you like */
+.list-inset .item.item-input input{
+    padding-right:0 !important;
+}

@@ -1,5 +1,5 @@
 
-var app = angular.module('app', ['ionic'])
+var app = angular.module('app', ['ionic' , 'LocalStorageModule'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,8 +17,10 @@ var app = angular.module('app', ['ionic'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-
+.config(function($stateProvider, $urlRouterProvider , localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setPrefix('IonicEthereumWallet')
+    .setStorageType('localStorage')
   $stateProvider
 
   // setup an abstract state for the tabs directive

@@ -1,9 +1,12 @@
 <ion-view view-title="Configuration">
   <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+    <div class="list list-inset"> 
+      <label class="item item-input">     
+          <ion-label fixed>Private Key</ion-label> 
+        <input type="text" ng-model="Settings.PrivateKey" aria-placeholder="(Ethereum Wallet Private Key)">
+      </label>
+      <button class="button button-block button-positive" ng-click="saveConfiguration()">Save</button>
+      <button class="button button-block button-positive" ng-click="getConfiguration()">Get</button>
+    </div>
   </ion-content>
 </ion-view>
