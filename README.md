@@ -1,26 +1,20 @@
-Ionic App Base
-==============
+# Ionic-Ethereum-Wallet
 
-A starting project for Ionic that optionally supports using custom SCSS.
+This is a proof of concept about ethereum, a digital wallet in the form of movile application only front end.
+ 
+This movile application will allow you to open your wallet by private key and conduct transactions between addresses with a low cost of gas.
 
-## Using this project
+You can also view the price of the current ethereum plus a chart with the price history for the current year.
 
-We recommend using the [Ionic CLI](https://github.com/ionic-team/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+## Steps
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-```bash
-$ npm install -g ionic cordova
-```
+1. `git clone https://github.com/Megatone/Ionic-Ethereum-Wallet`
+2. `cd Ionic-Ethereum-Wallet`
+3. `npm i --save`
+4. `npm start` or `ionic serve`
 
-Then run:
 
-```bash
-$ ionic start myProject tabs --type=ionic1
-```
 
-More info on this can be found on the Ionic [Getting Started](https://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/ionic-team/ionic-cli) repo.
-
-## Issues
-
-Issues have been disabled on this repo. If you do find an issue or have a question, consider posting it on the [Ionic Forum](https://forum.ionicframework.com/). If there is truly an error, follow our guidelines for [submitting an issue](https://ionicframework.com/submit-issue/) to the main Ionic repository.
+## Screenshots
