@@ -1,5 +1,5 @@
 {
-  "name": "Ionic-Ethereum-Wallet",
+  "name": "ionic-ethereum-wallet",
   "version": "0.0.1",
   "description": "An Ionic project",
   "devDependencies": {
@@ -9,5 +9,22 @@
     "gulp-clean-css": "^3.7.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^3.1.0"
-  }
+  },
+  "main": "gulpfile.js",
+  "dependencies": {
+    "cordova": "^7.0.1"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Megatone/Ionic-Ethereum-Wallet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Megatone/Ionic-Ethereum-Wallet/issues"
+  },
+  "homepage": "https://github.com/Megatone/Ionic-Ethereum-Wallet#readme"
 }

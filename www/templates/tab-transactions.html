@@ -1,0 +1,16 @@
+<ion-view view-title="Transactions">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="transaction in transactions" type="item-text-wrap" href="#/tab/transactions/{{transaction.id}}">
+        <img ng-src="{{transaction.face}}">
+        <h2>{{transaction.name}}</h2>
+        <p>{{transaction.lastText}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(transaction)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

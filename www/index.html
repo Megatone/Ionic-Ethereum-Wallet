@@ -2,8 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>Ethereum Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/fabs/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/fabs/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/fabs/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/fabs/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/fabs/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/fabs/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/fabs/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/fabs/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/fabs/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/fabs/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/fabs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/fabs/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/fabs/favicon-16x16.png">
+    <link rel="manifest" href="/img/fabs/manifest.json">
+    <meta name="msapplication-TileColor" content="grey">
+    <meta name="msapplication-TileImage" content="/img/fabs/ms-icon-144x144.png">
+    <meta name="theme-color" content="black">
 
     <link rel="manifest" href="manifest.json">
 
@@ -31,10 +48,14 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
+    <script src="js/controllers/WalletController.js"></script>
+
+    <script src="js/controllers/TransactionsController.js"></script>
+    <script src="js/controllers/TransactionDetailController.js"></script>
+    <script src="js/controllers/ConfigurationController.js"></script>    
+    <script src="js/services/TransactionService.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="app">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
