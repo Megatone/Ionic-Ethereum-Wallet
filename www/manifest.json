@@ -1,6 +1,6 @@
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Ionic Ethereum Wallet",
+  "short_name": "Ionic Ethereum Wallet",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
