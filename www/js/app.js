@@ -1,6 +1,6 @@
-var app = angular.module('app', ['ionic', 'LocalStorageModule' , 'WalletService'])
+var app = angular.module('app', ['ionic', 'LocalStorageModule', 'WalletService'])
 
-  .run(function ($ionicPlatform , $rootScope, $state ,  $location , WalletService) {
+  .run(function ($ionicPlatform, $rootScope, $state, $location, WalletService) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -15,18 +15,20 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule' , 'WalletService'
       }
     });
 
+
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-      if (toState.authenticate && !WalletService.isWalletLoaded()){
+      if (toState.authenticate && !WalletService.isWalletLoaded()) {
         // User isn’t authenticated
         $state.go("tab.configuration");
-        event.preventDefault();       
+        event.preventDefault();
       }
     });
   })
   .config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('IonicEthereumWallet')
-      .setStorageType('localStorage')
+
+      .setStorageType('localStorage');
     $stateProvider
 
       // setup an abstract state for the tabs directive
@@ -43,7 +45,7 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule' , 'WalletService'
         views: {
           'tab-wallet': {
             templateUrl: 'templates/tab-wallet.html',
-            controller: 'WalletController'           
+            controller: 'WalletController'
           }
         },
         authenticate: true
@@ -54,7 +56,7 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule' , 'WalletService'
         views: {
           'tab-transactions': {
             templateUrl: 'templates/tab-transactions.html',
-            controller: 'TransactionsController'          
+            controller: 'TransactionsController'
           }
         },
         authenticate: true
@@ -64,7 +66,7 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule' , 'WalletService'
         views: {
           'tab-transactions': {
             templateUrl: 'templates/transaction-detail.html',
-            controller: 'TransactionDetailController'            
+            controller: 'TransactionDetailController'
           }
         },
         authenticate: true
@@ -75,7 +77,7 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule' , 'WalletService'
         views: {
           'tab-configuration': {
             templateUrl: 'templates/tab-configuration.html',
-            controller: 'ConfigurationController'       
+            controller: 'ConfigurationController'
           }
         },
         authenticate: false

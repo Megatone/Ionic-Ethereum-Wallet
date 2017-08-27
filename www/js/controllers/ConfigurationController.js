@@ -12,23 +12,21 @@ app.controller('ConfigurationController', function ($scope, $rootScope, localSto
     $scope.Settings = angular.copy($rootScope.Settings);
   };
 
-
   $scope.saveConfiguration = function () {
     setItem('Settings', $scope.Settings);
     $rootScope.Settings = getItem("Settings");
-    console.log($rootScope.Settings);
   };
 
   function setItem(key, val) {
-    return localStorageService.set(key, val);
+    return localStorageService.set(key, val, 'localStorage');
   };
 
   function getItem(key) {
-    return localStorageService.get(key);
+    return localStorageService.get(key, 'localStorage');
   };
-  function removeItem(key) {
-    return localStorageService.remove(key);
-  }
 
+  function removeItem(key) {
+    return localStorageService.remove(key, 'localStorage');
+  };
 
 });

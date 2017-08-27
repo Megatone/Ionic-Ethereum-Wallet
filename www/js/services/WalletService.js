@@ -17,7 +17,7 @@ angular.module('WalletService', []).service('WalletService', function ($rootScop
         if (privateKey.substring(0, 2) !== '0x') { privateKey = '0x' + privateKey; }
         this.Wallet = new ethers.Wallet(privateKey);
         this.Wallet.provider = new ethers.providers.getDefaultProvider(false);
-        
+
         window.location = "#/tab/wallet";
     };
 
@@ -28,5 +28,18 @@ angular.module('WalletService', []).service('WalletService', function ($rootScop
         }, function (error) {
 
         });
-    }
+    };
+
+    this.getGasPrice = function (_callback) {
+        this.Wallet.provider.getGasPrice().then(function (gasPrice) {
+            _callback(gasPrice.toString());
+            $rootScope.$apply();
+        }, function (err) {
+
+        });
+    };
+    this.getEtherPrice = function (_callback) {
+        _callback(0);
+    };
+
 });

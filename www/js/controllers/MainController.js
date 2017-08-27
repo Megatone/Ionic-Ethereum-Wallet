@@ -5,16 +5,24 @@ app.controller("MainController", function ($scope, $rootScope, localStorageServi
         AutoOpen: true
     };
     $rootScope.openWallet = function () {
-        WalletService.openWallet($rootScope.Settings.PrivateKey);
+        try {
+            WalletService.openWallet($rootScope.Settings.PrivateKey);
+        } catch (err) {
+            alert(err);
+        }
     };
-
+    $scope.IsWalletLoaded = function () {
+        return WalletService.isWalletLoaded();
+    }
 
     function inicializar() {
-        $rootScope.Settings = getItem("Settings");
-        if ($rootScope.Settings) {
-            if ($rootScope.Settings.AutoOpen) {
-                if ($scope.Settings.PrivateKey) {
-                    $rootScope.openWallet();
+        if (localStorageService.length() > 0) {
+            $rootScope.Settings = getItem("Settings");
+            if ($rootScope.Settings) {
+                if ($rootScope.Settings.AutoOpen) {
+                    if ($scope.Settings.PrivateKey) {
+                        $rootScope.openWallet();
+                    }
                 }
             }
         }
@@ -23,20 +31,18 @@ app.controller("MainController", function ($scope, $rootScope, localStorageServi
 
 
     function setItem(key, val) {
-        return localStorageService.set(key, val);
+        return localStorageService.set(key, val, 'localStorage');
     };
 
     function getItem(key) {
-        return localStorageService.get(key);
+        return localStorageService.get(key, 'localStorage');
     };
 
     function removeItem(key) {
-        return localStorageService.remove(key);
+        return localStorageService.remove(key, 'localStorage');
     };
 
-    $scope.IsWalletLoaded = function () {
-        return WalletService.isWalletLoaded();
-    }
+
 
     inicializar();
 

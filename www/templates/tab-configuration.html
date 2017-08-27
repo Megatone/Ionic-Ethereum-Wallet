@@ -1,6 +1,6 @@
 <ion-view view-title="Configuration">
   <ion-content>
-    <div class="list list-inset"> 
+    <div class="list list-inset">
       <label class="item item-input">     
           <ion-label fixed>Private Key</ion-label> 
         <input type="text" ng-model="Settings.PrivateKey" aria-placeholder="(Ethereum Wallet Private Key)">
@@ -9,9 +9,9 @@
           <ion-label fixed>Auto Open Wallet</ion-label> 
           <ion-toggle checked="false" class="toggle" ng-model="Settings.AutoOpen"></ion-toggle>
       </label>
-      <button class="button button-block button-positive" ng-click="saveConfiguration()">Save</button>     
-      <button class="button button-block button-positive" ng-click="openWallet()">Open</button>  
-      
+      <button class="button button-block button-positive" ng-click="saveConfiguration()">Save</button>
+      <button class="button button-block button-positive" ng-click="openWallet()">Open</button>
+
     </div>
     <pre>{{Settings | json : 4}}</pre>
   </ion-content>

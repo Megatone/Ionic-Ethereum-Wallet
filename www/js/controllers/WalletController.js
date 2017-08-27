@@ -3,7 +3,9 @@ app.controller('WalletController', function ($scope, $rootScope, $state, WalletS
     $scope.Wallet = WalletService.getWallet();
 
     $scope.AccountInformation = {
-        Balance: 0
+        Balance: 0,
+        GasPrice: 0,
+        EtherPrice: 0
     };
 
     inicializar();
@@ -12,6 +14,12 @@ app.controller('WalletController', function ($scope, $rootScope, $state, WalletS
         WalletService.getBalance(function (balance) {
             $scope.AccountInformation.Balance = balance;
         });
+        WalletService.getGasPrice(function (gasPrice) {
+            $scope.AccountInformation.GasPrice = gasPrice;
+        });
+        WalletService.getEtherPrice(function (price) {
+            $scope.AccountInformation.EtherPrice = price;
+        })
 
     };
 
