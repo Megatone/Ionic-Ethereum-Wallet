@@ -23,8 +23,8 @@
     </label>
     <button class="button button-positive icon ion-loop" ng-click="reloadWallet()"></button>
     <button class="button button-positive icon ion-search" style="left:56px;" ng-click="openModal('templates/modals/modalViewTransactionsHistory.html')"></button>
-    <button class="button button-positive icon ion-paper-airplane" style="left:112px;" ng-click="sendEther()"></button>
-    <button class="button button-positive icon ion-share" style="left:168px;" ng-click="shareAddress()"></button>
+    <button class="button button-positive icon ion-paper-airplane" style="left:112px;" ng-click="openModal('templates/modals/modalSendEther.html')"></button>
+    <button class="button button-positive icon ion-share" style="left:168px;" ng-click="openModal('templates/modals/modalShareWallet.html')"></button>
     <button class="button button-positive icon ion-locked" style="left:224px;" ng-click="openModal('templates/modals/modalUnsetPasswordWallet.html')" ng-if="wallet.password != ''"></button>
     <button class="button button-positive icon ion-unlocked" style="left:224px;"ng-click="openModal('templates/modals/modalSetPasswordWallet.html')" ng-if="wallet.password == ''"></button>
     <button class="button button-positive icon ion-trash-a" style="left:280px;" ng-click="openModal('templates/modals/modalRemoveWallet.html')"></button>
