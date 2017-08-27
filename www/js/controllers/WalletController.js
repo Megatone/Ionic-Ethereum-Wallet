@@ -5,7 +5,11 @@ app.controller('WalletController', function ($scope, $rootScope, $state, WalletS
     $scope.AccountInformation = {
         Balance: 0,
         GasPrice: 0,
-        EtherPrice: 0
+        EtherPrice: {
+            BTCPrice: 0,
+            USDPrice: 0,
+            TimeStamp: new Date()
+        }
     };
 
     inicializar();
@@ -18,7 +22,11 @@ app.controller('WalletController', function ($scope, $rootScope, $state, WalletS
             $scope.AccountInformation.GasPrice = gasPrice;
         });
         WalletService.getEtherPrice(function (price) {
-            $scope.AccountInformation.EtherPrice = price;
+            $scope.AccountInformation.EtherPrice ={
+                BTCPrice: parseFloat(price.ethbtc),
+                USDPrice: parseFloat(price.ethusd),
+                TimeStamp: new Date(price.ethbtc_timestamp * 1000)
+            } 
         })
 
     };

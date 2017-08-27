@@ -1,4 +1,4 @@
-angular.module('WalletService', []).service('WalletService', function ($rootScope, $state) {
+angular.module('WalletService', []).service('WalletService', function ($rootScope, $state, $http) {
     var Wallet = null;
 
     this.setWallet = function (_wallet) {
@@ -10,15 +10,21 @@ angular.module('WalletService', []).service('WalletService', function ($rootScop
     };
 
     this.isWalletLoaded = function () {
-        return (this.Wallet != null)
+        var a = (this.Wallet != null);
+        return a;
     };
 
     this.openWallet = function (privateKey) {
-        if (privateKey.substring(0, 2) !== '0x') { privateKey = '0x' + privateKey; }
-        this.Wallet = new ethers.Wallet(privateKey);
-        this.Wallet.provider = new ethers.providers.getDefaultProvider(false);
+        if (!this.isWalletLoaded()) {
+            if (privateKey.substring(0, 2) !== '0x') { privateKey = '0x' + privateKey; }
+            this.Wallet = new ethers.Wallet(privateKey);
+            console.log(this.Wallet);
+            this.Wallet.provider = new ethers.providers.getDefaultProvider(false);
+        }
+    };
 
-        window.location = "#/tab/wallet";
+    this.closeWallet = function () {
+        this.Wallet = null;        
     };
 
     this.getBalance = function (_callback) {
@@ -38,8 +44,15 @@ angular.module('WalletService', []).service('WalletService', function ($rootScop
 
         });
     };
+
     this.getEtherPrice = function (_callback) {
-        _callback(0);
+        $http({
+            method: 'GET',
+            url: 'http://api.etherscan.io/api?module=stats&action=ethprice'
+        }).then(function successCallback(response) {
+           _callback(response.data.result);         
+        }, function errorCallback(response) {
+        });
     };
 
 });

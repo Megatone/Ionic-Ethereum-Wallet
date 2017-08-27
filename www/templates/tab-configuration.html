@@ -3,14 +3,15 @@
     <div class="list list-inset">
       <label class="item item-input">     
           <ion-label fixed>Private Key</ion-label> 
-        <input type="text" ng-model="Settings.PrivateKey" aria-placeholder="(Ethereum Wallet Private Key)">
+        <input type="text" ng-model="Settings.PrivateKey" aria-placeholder="(Ethereum Wallet Private Key)" ng-change="saveConfiguration()">
       </label>
       <label class="item item-input">     
           <ion-label fixed>Auto Open Wallet</ion-label> 
-          <ion-toggle checked="false" class="toggle" ng-model="Settings.AutoOpen"></ion-toggle>
+          <ion-toggle checked="false" class="toggle" ng-model="Settings.AutoOpen" ng-change="saveConfiguration()"></ion-toggle>
       </label>
-      <button class="button button-block button-positive" ng-click="saveConfiguration()">Save</button>
-      <button class="button button-block button-positive" ng-click="openWallet()">Open</button>
+    <!--  <button class="button button-block button-positive" ng-click="saveConfiguration()">Save</button>-->
+      <button class="button button-block button-positive" ng-click="openWallet()" ng-disabled="IsWalletLoaded()">Open Wallet</button>
+      <button class="button button-block button-positive" ng-click="closeWallet()" ng-disabled="!IsWalletLoaded()">Close Wallet</button>
 
     </div>
     <pre>{{Settings | json : 4}}</pre>

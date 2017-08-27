@@ -4,16 +4,21 @@ app.controller("MainController", function ($scope, $rootScope, localStorageServi
         PrivateKey: '',
         AutoOpen: true
     };
+
     $rootScope.openWallet = function () {
-        try {
-            WalletService.openWallet($rootScope.Settings.PrivateKey);
-        } catch (err) {
-            alert(err);
-        }
+        WalletService.openWallet($rootScope.Settings.PrivateKey);
+        window.location = "#/tab/wallet";
     };
+    $rootScope.closeWallet = function () {
+        WalletService.closeWallet();   
+        $rootScope.Settings.AutoOpen = false;
+        setItem('Settings' , $rootScope.Settings  );
+        window.location.reload();
+    };
+
     $scope.IsWalletLoaded = function () {
         return WalletService.isWalletLoaded();
-    }
+    };
 
     function inicializar() {
         if (localStorageService.length() > 0) {
@@ -27,7 +32,6 @@ app.controller("MainController", function ($scope, $rootScope, localStorageServi
             }
         }
     };
-
 
 
     function setItem(key, val) {

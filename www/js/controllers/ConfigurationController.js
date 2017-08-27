@@ -29,4 +29,6 @@ app.controller('ConfigurationController', function ($scope, $rootScope, localSto
     return localStorageService.remove(key, 'localStorage');
   };
 
+ 
+
 });
