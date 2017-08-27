@@ -1,45 +1,46 @@
-angular.module('WalletService', []).service('WalletService', function ($rootScope, $state, $http) {
-    var Wallet = null;
-
-    this.setWallet = function (_wallet) {
-        this.Wallet = _wallet;
-    };
-
-    this.getWallet = function () {
-        return this.Wallet;
-    };
-
-    this.isWalletLoaded = function () {
-        var a = (this.Wallet != null);
-        return a;
-    };
+angular.module('WalletService', []).service('WalletService', function ($http) {
+    this.Wallet = null;
 
     this.openWallet = function (privateKey) {
-        if (!this.isWalletLoaded()) {
-            if (privateKey.substring(0, 2) !== '0x') { privateKey = '0x' + privateKey; }
-            this.Wallet = new ethers.Wallet(privateKey);
-            console.log(this.Wallet);
-            this.Wallet.provider = new ethers.providers.getDefaultProvider(false);
-        }
+        if (privateKey.substring(0, 2) !== '0x') { privateKey = '0x' + privateKey; }
+        this.Wallet = new ethers.Wallet(privateKey);
+        this.Wallet.provider = new ethers.providers.getDefaultProvider(false);
+        return this.Wallet;
     };
-
     this.closeWallet = function () {
-        this.Wallet = null;        
-    };
+        this.Wallet = null;
+    };  
 
     this.getBalance = function (_callback) {
         this.Wallet.getBalance('pending').then(function (balance) {
-            _callback(ethers.utils.formatEther(balance, { commify: true }));
-            $rootScope.$apply();
+            _callback(ethers.utils.formatEther(balance, { commify: true }));         
         }, function (error) {
 
+        });
+    };
+    this.getTransactionsCount = function(_callback){
+        $http({
+            method: 'GET',
+            url: 'http://api.etherscan.io/api?module=account&action=txlist&address=' + this.Wallet.address + '&startblock=0&endblock=99999999&sort=desc'
+        }).then(function successCallback(response) {
+            _callback(response.data.result.length);                        
+        }, function errorCallback(response) {
+        });
+    };
+
+    this.getTransactionsHistory = function(_callback) {        
+        $http({
+            method: 'GET',
+            url: 'http://api.etherscan.io/api?module=account&action=txlist&address=' + this.Wallet.address + '&startblock=0&endblock=99999999&sort=desc'
+        }).then(function successCallback(response) {
+            _callback(response.data.result);                        
+        }, function errorCallback(response) {
         });
     };
 
     this.getGasPrice = function (_callback) {
         this.Wallet.provider.getGasPrice().then(function (gasPrice) {
             _callback(gasPrice.toString());
-            $rootScope.$apply();
         }, function (err) {
 
         });
@@ -50,7 +51,7 @@ angular.module('WalletService', []).service('WalletService', function ($rootScop
             method: 'GET',
             url: 'http://api.etherscan.io/api?module=stats&action=ethprice'
         }).then(function successCallback(response) {
-           _callback(response.data.result);         
+            _callback(response.data.result);
         }, function errorCallback(response) {
         });
     };

@@ -1,6 +1,6 @@
-var app = angular.module('app', ['ionic', 'LocalStorageModule', 'WalletService'])
+var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule' , 'WalletService'])
 
-  .run(function ($ionicPlatform, $rootScope, $state, $location, WalletService) {
+  .run(function ($ionicPlatform, $rootScope, $state, $location) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -14,20 +14,10 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule', 'WalletService']
         StatusBar.styleDefault();
       }
     });
-
-
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-      if (toState.authenticate && !WalletService.isWalletLoaded()) {
-        // User isn’t authenticated
-        $state.go("tab.configuration");
-        event.preventDefault();
-      }
-    });
   })
   .config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
     localStorageServiceProvider
-      .setPrefix('IonicEthereumWallet')
-
+      .setPrefix('IonicEthereumWallet2')
       .setStorageType('localStorage');
     $stateProvider
 
@@ -37,53 +27,34 @@ var app = angular.module('app', ['ionic', 'LocalStorageModule', 'WalletService']
         abstract: true,
         templateUrl: 'templates/tabs.html'
       })
-
-      // Each tab has its own nav history stack:
-
-      .state('tab.wallet', {
-        url: '/wallet',
+      .state('tab.wallets', {
+        url: '/wallets',
         views: {
-          'tab-wallet': {
-            templateUrl: 'templates/tab-wallet.html',
-            controller: 'WalletController'
+          'tab-wallets': {
+            templateUrl: 'templates/tab-wallets.html',
+            controller: 'WalletsController'
           }
-        },
-        authenticate: true
+        }
       })
-
-      .state('tab.transactions', {
-        url: '/transactions',
+      .state('tab.wallet-detail', {
+        url: '/wallets/:address',
         views: {
-          'tab-transactions': {
-            templateUrl: 'templates/tab-transactions.html',
-            controller: 'TransactionsController'
+          'tab-wallets': {
+            templateUrl: 'templates/wallet-detail.html',
+            controller: 'WalletDetailController'
           }
-        },
-        authenticate: true
+        }
       })
-      .state('tab.transaction-detail', {
-        url: '/transactions/:transactionId',
+      .state('tab.new-wallet', {
+        url: '/newWallet',
         views: {
-          'tab-transactions': {
-            templateUrl: 'templates/transaction-detail.html',
-            controller: 'TransactionDetailController'
+          'tab-wallets': {
+            templateUrl: 'templates/new-wallet.html',
+            controller: 'NewWalletController'
           }
-        },
-        authenticate: true
-      })
-
-      .state('tab.configuration', {
-        url: '/configuration',
-        views: {
-          'tab-configuration': {
-            templateUrl: 'templates/tab-configuration.html',
-            controller: 'ConfigurationController'
-          }
-        },
-        authenticate: false
+        }
       });
-
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/wallet');
+    $urlRouterProvider.otherwise('/tab/wallets');
 
   });

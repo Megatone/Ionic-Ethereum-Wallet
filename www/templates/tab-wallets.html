@@ -1,0 +1,17 @@
+<ion-view view-title="Wallets">
+    <ion-floating-button click="newWallet()" has-footer="false" button-color="#2AC9AA" icon="ion-plus" iconColor="#fff">
+      </ion-floating-button>
+    <ion-content>
+      <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="wallet in wallets" type="item-text-wrap" href="#/tab/wallets/{{wallet.address}}">       
+          <div id="avatarList" style="background-image:{{getAvatar(wallet.address)}}">            
+          </div>
+          <h2>{{wallet.name}}</h2>
+          <p>{{wallet.address}}</p>
+          <i class="icon ion-locked icon-grey" ng-if="wallet.password  != ''"></i>
+          <i class="icon ion-unlocked icon-grey" ng-if="wallet.password  == ''"></i>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-view>
+  

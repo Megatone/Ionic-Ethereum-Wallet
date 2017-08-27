@@ -1,23 +1,9 @@
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="Wallet" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/wallet" ng-if="IsWalletLoaded()" >
-    <ion-nav-view name="tab-wallet" ></ion-nav-view>
+  <!-- Wallets Tab -->
+  <ion-tab title="Wallets" icon-off="ion-card" icon-on="ion-card" href="#/tab/wallets">
+    <ion-nav-view name="tab-wallets"></ion-nav-view>
   </ion-tab>
 
-  <!-- Chats Tab -->
-  <ion-tab title="Transactions" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/transactions"  ng-if="IsWalletLoaded()">
-    <ion-nav-view name="tab-transactions"></ion-nav-view>
-  </ion-tab>
-
-  <ion-tab title="Configuration" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/configuration"  ng-if="IsWalletLoaded()">
-    <ion-nav-view name="tab-configuration"></ion-nav-view>
-  </ion-tab>
-
-  <!-- Account Tab -->
-  <ion-tab title="Configuration" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/configuration"  ng-if="!IsWalletLoaded()">
-    <ion-nav-view name="tab-configuration"></ion-nav-view>
-  </ion-tab>
-
-
+  
 </ion-tabs>

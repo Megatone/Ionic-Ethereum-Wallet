@@ -43,21 +43,25 @@
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <link href="lib/ion-floating-menu/dist/ion-floating-menu.css" rel="stylesheet" type="text/css" /> ...
+  <script src="lib/ion-floating-menu/dist/ion-floating-menu.js" type="text/javascript"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
   <!--<script src="js/library/ethers.js"></script>-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="js/library/angular-local-storage.min.js"></script>
   <script src="https://cdn.ethers.io/scripts/ethers-v2.0.min.js"></script>
   <!--<script src="js/library/ethers.js" ></script>-->
   <script src="js/app.js"></script>
   <script src="js/controllers/MainController.js"></script>
-  <script src="js/controllers/WalletController.js"></script>
-  <script src="js/controllers/TransactionsController.js"></script>
-  <script src="js/controllers/TransactionDetailController.js"></script>
-  <script src="js/controllers/ConfigurationController.js"></script>
-  <script src="js/services/TransactionService.js"></script>
+  <script src="js/controllers/WalletsController.js"></script>
+  <script src="js/controllers/WalletDetailController.js"></script>
+  <script src="js/controllers/NewWalletController.js"></script>
+  <script src="js/services/WalletsService.js"></script>
   <script src="js/services/WalletService.js"></script>
+  
 </head>
 
 <body ng-app="app" ng-controller="MainController">
