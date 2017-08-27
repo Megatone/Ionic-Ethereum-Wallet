@@ -1,21 +1,26 @@
 app.controller('WalletDetailController', function ($scope, $rootScope, $state, $stateParams, localStorageService, WalletsService, WalletService, $ionicModal, $q) {
+
     $scope.RealWallet = null;
     $scope.wallet = WalletsService.getWallet($stateParams.address);
     $scope.Balance = 0;
     $scope.NumTransactions = 0;
+    $scope.activeModal;
+    $scope.Transactions = [];
 
     $scope.InputsModalSetPassword = {
         password: '',
         repeatPassword: ''
     };
+
     $scope.InputModalOpenWalletPassword = {
-        password : ''
+        password: ''
     };
 
     $scope.getAvatar = function () {
         var pattern = GeoPattern.generate($stateParams.address);
         return pattern.toDataUrl();
     };
+
     $scope.removeWallet = function () {
         WalletsService.removeWallet($scope.wallet);
         $state.go('tab.wallets');
@@ -23,23 +28,26 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     };
 
     $scope.$watch('wallet', function (newValue, oldValue) {
-
-        if($scope.wallet.password !=  ''){
+        if ($scope.wallet.password !== '') {
             $scope.openModal('templates/modals/modalOpenWalletPassword.html');
-        }else{
+        } else {
             openWallet();
-        }       
+        }
     });
 
-    function openWallet(){
+    function openWallet() {
         $scope.RealWallet = WalletService.openWallet($scope.wallet.privateKey);
         WalletService.getBalance(function (balance) {
-            $scope.Balance = balance;          
-            $scope.$apply();
+            $scope.Balance = balance;
+            apply();
         });
         WalletService.getTransactionsCount(function (transactionsCount) {
             $scope.NumTransactions = parseInt(transactionsCount);
-            $scope.$apply();
+            apply();
+        });
+        WalletService.getTransactionsHistory(function (transactions) {
+            $scope.Transactions = transactions;
+            apply();
         });
     };
 
@@ -47,24 +55,22 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         if ($scope.InputsModalSetPassword.password != '' && $scope.InputsModalSetPassword.password == $scope.InputsModalSetPassword.repeatPassword) {
             $scope.wallet.password = $scope.InputsModalSetPassword.password;
             WalletsService.updateWallet($scope.wallet);
-            $scope.closeModal();          
+            $scope.closeModal();
         } else {
             alert("Complete passwords fields with same text for set password on wallet");
         }
     };
 
-    $scope.unsetPassword = function(){
+    $scope.unsetPassword = function () {
         $scope.wallet.password = '';
         WalletsService.updateWallet($scope.wallet);
-        $scope.closeModal();      
+        $scope.closeModal();
         alert("now the wallet haven't password");
     };
 
-    $scope.reloadWallet = function(){
+    $scope.reloadWallet = function () {
         openWallet();
     };
-
-    $scope.activeModal;
 
     var initModal = function (templateUrl) {
         if ($scope.activeModal) {
@@ -80,7 +86,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         }
     };
 
-    $scope.openModal= function (templateUrl) {
+    $scope.openModal = function (templateUrl) {
         initModal(templateUrl).then(function () {
             $scope.activeModal.show();
         });
@@ -90,31 +96,51 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         $scope.activeModal.remove();
         $scope.activeModal = undefined;
         $scope.InputsModalSetPassword = {
-            password : '',
-            repeatPassword : ''
+            password: '',
+            repeatPassword: ''
         };
         $scope.InputModalOpenWalletPassword = {
-            password : ''
+            password: ''
         };
     };
 
-    $scope.closeModalOpenWalletPassword = function(){
+    $scope.closeModalOpenWalletPassword = function () {
         $scope.closeModal();
         $state.go('tab.wallets');
     };
 
-    $scope.openWalletPassword = function(){
-        if($scope.InputModalOpenWalletPassword.password != ''){
-            if($scope.InputModalOpenWalletPassword.password == $scope.wallet.password){
+    $scope.openWalletPassword = function () {
+        if ($scope.InputModalOpenWalletPassword.password != '') {
+            if ($scope.InputModalOpenWalletPassword.password === $scope.wallet.password) {
                 openWallet();
                 $scope.closeModal();
-            }else{
+            } else {
                 alert('The password is not correct.');
-                $scope.closeModalOpenWalletPassword ();
+                $scope.closeModalOpenWalletPassword();
             }
-        }else{
+        } else {
             alert('Enter the password field');
         }
     };
 
+    function apply() {
+        try {
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        } catch (err) {
+
+        }
+    };
+
+    $scope.getDateTransacction = function (timeStamp) {
+        var d = new Date(timeStamp * 1000);
+        return d.toISOString();
+    };
+
+    $scope.attachListToScreen = function () {     
+        try{  
+        document.getElementById("list-transactionHistory").firstChild.style.height = (window.screen.height - 132) + "px";      
+        }catch(err){}
+    };
 });

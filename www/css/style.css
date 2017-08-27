@@ -77,3 +77,25 @@ button.button-bottom{
 i.icon-grey{
     color:#387ef5;
 }
+i.icon-left{
+    float: left;
+    left: 19px;
+    font-size: 3em !important;
+}
+i.icon-green{
+    color:#38F553;
+}
+i.icon-red{
+    color:#F53838;
+}
+
+#list-transactionHistory{
+    display: inline-grid;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#list-transactionHistory > div.list{    
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

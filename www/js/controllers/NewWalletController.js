@@ -3,13 +3,13 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
         name: '',
         address: '',
         privateKey: '',
-        password : ''
+        password: ''
     };
     $scope.modalNewWallet = {
         name: '',
         address: '',
         privateKey: '',
-        password:''
+        password: ''
     };
 
     $scope.createRandomWallet = function () {
@@ -58,16 +58,16 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
     $scope.addWalletFromPrivateKey = function () {
         if ($scope.modalNewWallet.name != '') {
             if ($scope.modalNewWallet.privateKey.substring(0, 2) !== '0x') { $scope.modalNewWallet.privateKey = '0x' + $scope.modalNewWallet.privateKey; }
-            try{
-            var wallet = new ethers.Wallet($scope.modalNewWallet.privateKey);
-            $scope.modalNewWallet.address = wallet.address;
-            WalletsService.addWallet($scope.modalNewWallet);
-            $scope.modal.hide();
-            $state.go('tab.wallets');
-            }catch(err){
+            try {
+                var wallet = new ethers.Wallet($scope.modalNewWallet.privateKey);
+                $scope.modalNewWallet.address = wallet.address;
+                WalletsService.addWallet($scope.modalNewWallet);
+                $scope.modal.hide();
+                $state.go('tab.wallets');
+            } catch (err) {
                 alert(err);
             }
-        }else{
+        } else {
             alert("Complete the name field to create wallet");
         }
     };
