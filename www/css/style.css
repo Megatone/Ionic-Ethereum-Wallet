@@ -99,3 +99,30 @@ i.icon-red{
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.icon-clipboard-share , .icon-scan-send{
+    width: 50px;       
+    position: absolute;
+    right: 0;
+    top: 0px;
+    border-radius: 0;
+}
+.icon-scan-send{
+    top: 156px !important;
+    z-index: 3;
+}
+ ion-nav-view > ion-tabs.tabs-icon-top.tabs-color-active-positive.pane.tabs-top.tabs-striped {
+    top:20px;
+}
+
+.btn-share-whatsapp{
+    margin: 10px auto !important;
+    width: 90% !important;
+}
+
+.error-amount{
+    background-color: #ef473a !important;
+}
+.success-amount{
+    background-color: #33cd5f !important;
+}

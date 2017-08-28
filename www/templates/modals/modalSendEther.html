@@ -1,11 +1,44 @@
 <div class="modal">
-        <header class="bar bar-header bar-positive">
-            <h1 class="title">Send Ether</h1>
-            <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
-        </header>
-        <content has-header="true" padding="true">
-            <br>
-            <br>
-            <br>          
-        </content>
-    </div>
+    <header class="bar bar-header bar-positive">
+        <h1 class="title">Send Ether</h1>
+        <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
+    </header>
+    <content has-header="true" padding="true">
+        <br>
+        <br>
+        <br>
+        <label class="item item-input item-input-disabled">     
+                <ion-label fixed>Address :</ion-label> 
+                <input type="text" ng-value="wallet.address" ng-disabled="true" class="item-input-disabled"/>
+              </label>
+        <label class="item item-input item-input-disabled">     
+                <ion-label fixed>Balance :</ion-label> 
+                <input type="text" ng-value="Balance" ng-disabled="true" class="item-input-disabled"/>
+              </label>
+        <button class="button button-positive icon ion-qr-scanner icon-scan-send" ng-click="scanCode()"></button>
+        <label class="item item-input ">     
+           
+            <ion-label fixed>Target Address :</ion-label> 
+            <input type="text" ng-model="InputsSendEther.targetAddress" />
+        </label>
+        <label class="item item-input ">     
+            <ion-label fixed>Amount :</ion-label> 
+            <input type="number" ng-model="InputsSendEther.amount"/>
+        </label>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>Transaction Cost :</ion-label> 
+            <input type="text" ng-value="InputsSendEther.transactionCost" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+        <div class="item range">
+                <i class="icon ion-minus-circled"></i>
+                <input type="range" name="GasPrice" ng-model="InputsSendEther.rangeGasPrice" ng-change="changeRangeGasPrice()">
+                <i class="icon ion-plus-circled"></i>
+              </div>
+        <label class="item item-input item-input-disabled" ng-class="getTotalAmountClass()">     
+                <ion-label fixed>Total :</ion-label> 
+                <input type="text" ng-value="getTotalTransactionCost()" ng-disabled="true" class="item-input-disabled" ng-class="getTotalAmountClass()"/>
+            </label>
+        <button class="button button-block button-positive icon ion-paper-airplane button-bottom " ng-click="sendEther()"> Send Ether</button>
+
+    </content>
+</div>

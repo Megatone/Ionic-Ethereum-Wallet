@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule' , 'WalletService'])
+var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule' , 'WalletService' , 'monospaced.qrcode' , 'ngCordova' , 'ngclipboard'])
 
   .run(function ($ionicPlatform, $rootScope, $state, $location) {
     $ionicPlatform.ready(function () {

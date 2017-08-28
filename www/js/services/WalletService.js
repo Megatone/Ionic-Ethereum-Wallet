@@ -46,13 +46,25 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
         });
     };
 
-    this.getEtherPrice = function (_callback) {
+    this.getEtherPriceUSD = function (_callback) {
         $http({
             method: 'GET',
             url: 'http://api.etherscan.io/api?module=stats&action=ethprice'
         }).then(function successCallback(response) {
-            _callback(response.data.result);
+            _callback(response.data.result.ethusd);
         }, function errorCallback(response) {
+        });
+    };
+
+    this.sendEther = function(transactionInfo , _callback){      
+        var amountWei = ethers.utils.parseEther(transactionInfo.amount.toString());
+        this.Wallet.send(transactionInfo.targetAddress, amountWei , {
+            gasPrice: transactionInfo.gasPrice,
+            gasLimit: transactionInfo.gasLimit,
+        }).then(function (transactionId) {    
+          _callback("The transfer has been successful, its identifier is " + transactionId.hash);
+        }, function (error) {
+          _callback(error);
         });
     };
 

@@ -1,11 +1,28 @@
 <div class="modal">
-        <header class="bar bar-header bar-positive">
-            <h1 class="title">Share Address</h1>
-            <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
-        </header>
-        <content has-header="true" padding="true">
-            <br>
-            <br>
-            <br>          
-        </content>
-    </div>
+    <header class="bar bar-header bar-positive">
+        <h1 class="title">Share Address</h1>
+        <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
+    </header>
+    <content has-header="true" padding="true">
+        <br>
+        <br>
+        <br>
+        <label class="item item-input item-input-disabled">     
+                <button class="button button-positive  icon-clipboard-share" ngclipboard data-clipboard-target="#copy-address" onclick="alert('Address copied to clipboard')">
+                        <i class="icon ion-clipboard"></i>
+                    </button>
+            <ion-label fixed>Address :</ion-label>             
+            <input id="copy-address" type="text" ng-value="wallet.address" class="item-input-disabled">
+        </label>   
+        <br>
+        <hr>
+        <br>   
+        <center>
+            <qrcode error-correction-level="Q" size="200" data="{{wallet.address}}" download/>
+        </center>
+        <br>
+        <hr>
+        <br>
+        <button class="button button-block button-positive icon ion-chatbubbles btn-share-whatsapp" ng-click="shareViaWhatsApp()"> Share with WhatsApp</button>     
+    </content>
+</div>

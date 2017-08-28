@@ -2,23 +2,27 @@
   <ion-content class="padding" id="walletScreen">
     <div id="avatar" style="background-image:{{getAvatar()}}"></div>
     <label class="item item-input item-input-disabled">     
-      <ion-label fixed>Address</ion-label> 
+      <ion-label fixed>Address :</ion-label> 
       <input type="text" ng-value="wallet.address" ng-disabled="true" class="item-input-disabled"/>
     </label>
     <label class="item item-input item-input-disabled">     
-      <ion-label fixed>Balance</ion-label> 
+      <ion-label fixed>Balance :</ion-label> 
       <input type="text" ng-value="Balance" ng-disabled="true" class="item-input-disabled"/>
     </label>
     <label class="item item-input item-input-disabled">     
-      <ion-label fixed>Transactions</ion-label> 
+        <ion-label fixed>USD :</ion-label> 
+        <input type="text" value="{{getBalanceToUSD() | number : 2}} $" ng-disabled="true" class="item-input-disabled"/>
+      </label>
+    <label class="item item-input item-input-disabled">     
+      <ion-label fixed>Transactions :</ion-label> 
      <input type="text" ng-value="NumTransactions" ng-disabled="true" class="item-input-disabled"/>
     </label>
     <label class="item item-input item-input-disabled">     
-        <ion-label fixed>Private Key</ion-label> 
+        <ion-label fixed>Private Key :</ion-label> 
        <input type="text" ng-value="wallet.privateKey" ng-disabled="true" class="item-input-disabled"/>
     </label>
     <label class="item item-input item-input-disabled" ng-if="wallet.password != ''">     
-        <ion-label fixed>Password</ion-label> 
+        <ion-label fixed>Password :</ion-label> 
        <input type="password" ng-value="wallet.password" ng-disabled="true" class="item-input-disabled"/>
     </label>
     <button class="button button-positive icon ion-loop" ng-click="reloadWallet()"></button>

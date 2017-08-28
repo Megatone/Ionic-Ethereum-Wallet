@@ -36,6 +36,7 @@
 
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="lib/ion-floating-menu/dist/ion-floating-menu.css" rel="stylesheet" type="text/css" > 
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -43,16 +44,22 @@
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
-  <link href="lib/ion-floating-menu/dist/ion-floating-menu.css" rel="stylesheet" type="text/css" /> ...
+
   <script src="lib/ion-floating-menu/dist/ion-floating-menu.js" type="text/javascript"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
+  <script src="js/library/ng-cordova.min.js"></script>
   <script src="cordova.js"></script>
-  <!--<script src="js/library/ethers.js"></script>-->
+<script src="js/library/ethers.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="js/library/angular-local-storage.min.js"></script>
-  <script src="https://cdn.ethers.io/scripts/ethers-v2.0.min.js"></script>
+   <!-- <script src="https://cdn.ethers.io/scripts/ethers-v2.0.min.js"></script>-->
+  <script  src="js/library/qrcode.js"></script>
+	<script src="js/library/qrcode_UTF8.js"></script>
+  <script src="js/library/angular-qrcode.js"></script>
+  <script src="js/library/clipboard.min.js"></script>
+  <script src="js/library/ngClipboard.min.js"></script>
   <!--<script src="js/library/ethers.js" ></script>-->
   <script src="js/app.js"></script>
   <script src="js/controllers/MainController.js"></script>
