@@ -16,17 +16,14 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     $scope.InputModalOpenWalletPassword = {
         password: ''
     };
-    $scope.InputsSendEtherBase = {        
+    $scope.InputsSendEtherBase = {
         targetAddress: '',
         amount: 0,
         gasPrice: 0,
         gasLimit: 21000,
         transactionCost: 0,
-        rangeGasPrice : 100
+        rangeGasPrice: 100
     };
-
-
-
 
     $scope.getAvatar = function () {
         var pattern = GeoPattern.generate($stateParams.address);
@@ -65,18 +62,20 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
             $scope.InputsSendEtherBase.gasPrice = parseInt(gasPrice * 1);
             $scope.InputsSendEtherBase.transactionCost = ethers.utils.formatEther($scope.InputsSendEtherBase.gasPrice * $scope.InputsSendEtherBase.gasLimit);
             $scope.InputsSendEther = angular.copy($scope.InputsSendEtherBase);
+            apply();
         });
-        WalletService.getEtherPriceUSD(function(etherPriceUSD){
+        WalletService.getEtherPriceUSD(function (etherPriceUSD) {
             $scope.EtherPriceUSD = parseFloat(etherPriceUSD);
+            apply();
         });
     };
 
-    $scope.getBalanceToUSD = function(){
+    $scope.getBalanceToUSD = function () {
         return parseFloat(parseFloat($scope.EtherPriceUSD) * parseFloat($scope.Balance));
     };
 
     $scope.setPassword = function () {
-        if ($scope.InputsModalSetPassword.password != '' && $scope.InputsModalSetPassword.password == $scope.InputsModalSetPassword.repeatPassword) {
+        if ($scope.InputsModalSetPassword.password != '' && $scope.InputsModalSetPassword.password === $scope.InputsModalSetPassword.repeatPassword) {
             $scope.wallet.password = $scope.InputsModalSetPassword.password;
             WalletsService.updateWallet($scope.wallet);
             $scope.closeModal();
@@ -96,7 +95,6 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         openWallet();
     };
 
- 
     var initModal = function (templateUrl) {
         return $ionicModal.fromTemplateUrl(templateUrl, {
             scope: $scope,
@@ -162,7 +160,9 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
 
     $scope.attachListToScreen = function () {
         try {
-            document.getElementById("list-transactionHistory").firstChild.style.height = (window.screen.height - 132) + "px";
+
+            document.getElementById("list-transactionHistory").firstChild.style.height = (window.screen.height - 132) + "px !important;";
+
         } catch (err) { }
     };
 
@@ -181,13 +181,23 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     $scope.scanCode = function () {
         try {
             $cordovaBarcodeScanner.scan().then(function (barcodeData) {
-                $scope.InputsSendEther.targetAddress = barcodeData.text;
+                $scope.InputsSendEther.targetAddress = validateAdress(barcodeData.text) ? barcodeData.text : '';
             }, function (error) {
                 alert(err);
             });
         } catch (err) {
             alert('Scan Code not Suported' + err);
         }
+    };
+
+    function validateAdress(address) {
+        try {
+            ethers.utils.getAddress(address);
+        } catch (err) {
+            alert(err);
+            return false;
+        }
+        return true
     };
 
     $scope.getTotalTransactionCost = function () {
@@ -204,52 +214,46 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         }
     };
 
-    $scope.sendEther = function(){
-        if(checkTransactionValues()){
-            WalletService.sendEther(angular.copy($scope.InputsSendEther) , function(resultTransaction){
+    $scope.sendEther = function () {
+        if (checkTransactionValues()) {
+            WalletService.sendEther(angular.copy($scope.InputsSendEther), function (resultTransaction) {
                 alert(resultTransaction);
                 $scope.closeModal();
                 openWallet();
-            });  
+            });
         }
     };
 
-    function checkTransactionValues(){     
+    function checkTransactionValues() {
         try {
             ethers.utils.getAddress($scope.InputsSendEther.targetAddress);
-            if($scope.InputsSendEther.amount <= 0) 
+            if ($scope.InputsSendEther.amount <= 0)
                 throw "Error : Please enter positive amout.";
-            if(parseFloat($scope.getTotalTransactionCost()) > parseFloat($scope.Balance)) 
+            if (parseFloat($scope.getTotalTransactionCost()) > parseFloat($scope.Balance))
                 throw "Error : Total Transaction amount is more that your balance";
-        } catch (error) {    
-            alert(error);      
+        } catch (error) {
+            alert(error);
             return false;
         }
-        return true;      
+        return true;
     };
 
-    $scope.changeRangeGasPrice = function(){
-        var percent = parseInt($scope.InputsSendEther.rangeGasPrice);    
+    $scope.changeRangeGasPrice = function () {
+        var percent = parseInt($scope.InputsSendEther.rangeGasPrice);
         var maxGasPrice = $scope.InputsSendEtherBase.gasPrice;
-        var minGasPrice = ((maxGasPrice / 100) * 10);        
-        var diference = maxGasPrice - minGasPrice; 
-        var result = minGasPrice + ((diference / 100) * percent );
+        var minGasPrice = ((maxGasPrice / 100) * 10);
+        var diference = maxGasPrice - minGasPrice;
+        var result = minGasPrice + ((diference / 100) * percent);
         $scope.InputsSendEther.gasPrice = result;
         $scope.InputsSendEther.transactionCost = ethers.utils.formatEther($scope.InputsSendEther.gasPrice * $scope.InputsSendEther.gasLimit);
-        apply();      
+        apply();
     };
 
-    $scope.getTotalAmountClass= function(){
-        if(parseFloat($scope.getTotalTransactionCost()) > parseFloat($scope.Balance)){
+    $scope.getTotalAmountClass = function () {
+        if (parseFloat($scope.getTotalTransactionCost()) > parseFloat($scope.Balance)) {
             return 'error-amount';
-        }else{
+        } else {
             return 'success-amount';
         }
     };
-
-//21000000000 max
-// 2100000000 min
-//18900000000 dif
- ///  8883000000 calculate 
- // 10983000000
 });

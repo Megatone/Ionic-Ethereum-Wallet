@@ -9,31 +9,31 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
     };
     this.closeWallet = function () {
         this.Wallet = null;
-    };  
+    };
 
     this.getBalance = function (_callback) {
         this.Wallet.getBalance('pending').then(function (balance) {
-            _callback(ethers.utils.formatEther(balance, { commify: true }));         
+            _callback(ethers.utils.formatEther(balance, { commify: true }));
         }, function (error) {
 
         });
     };
-    this.getTransactionsCount = function(_callback){
+    this.getTransactionsCount = function (_callback) {
         $http({
             method: 'GET',
             url: 'http://api.etherscan.io/api?module=account&action=txlist&address=' + this.Wallet.address + '&startblock=0&endblock=99999999&sort=desc'
         }).then(function successCallback(response) {
-            _callback(response.data.result.length);                        
+            _callback(response.data.result.length);
         }, function errorCallback(response) {
         });
     };
 
-    this.getTransactionsHistory = function(_callback) {        
+    this.getTransactionsHistory = function (_callback) {
         $http({
             method: 'GET',
             url: 'http://api.etherscan.io/api?module=account&action=txlist&address=' + this.Wallet.address + '&startblock=0&endblock=99999999&sort=desc'
         }).then(function successCallback(response) {
-            _callback(response.data.result);                        
+            _callback(response.data.result);
         }, function errorCallback(response) {
         });
     };
@@ -56,15 +56,29 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
         });
     };
 
-    this.sendEther = function(transactionInfo , _callback){      
+    this.sendEther = function (transactionInfo, _callback) {
         var amountWei = ethers.utils.parseEther(transactionInfo.amount.toString());
-        this.Wallet.send(transactionInfo.targetAddress, amountWei , {
+        this.Wallet.send(transactionInfo.targetAddress, amountWei, {
             gasPrice: transactionInfo.gasPrice,
             gasLimit: transactionInfo.gasLimit,
-        }).then(function (transactionId) {    
-          _callback("The transfer has been successful, its identifier is " + transactionId.hash);
+        }).then(function (transactionId) {
+            _callback("The transfer has been successful, its identifier is " + transactionId.hash);
         }, function (error) {
-          _callback(error);
+            _callback(error);
+        });
+    };
+
+    this.getETHPriceHistory = function (days, _callback) {
+        var url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=' + days + '&aggregate=1&e=Kraken';
+        if (days == 1) {
+            url = 'https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=24&aggregate=1&e=Kraken';
+        }
+        $http({
+            method: 'GET',
+            url: url
+        }).then(function successCallback(response) {
+            _callback(response.data.Data);
+        }, function errorCallback(response) {
         });
     };
 

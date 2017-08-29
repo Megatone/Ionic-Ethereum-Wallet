@@ -90,14 +90,14 @@ i.icon-red{
 }
 
 #list-transactionHistory{
-    display: inline-grid;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    display: inline-grid !important;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
 }
 
 #list-transactionHistory > div.list{    
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
 }
 
 .icon-clipboard-share , .icon-scan-send{
@@ -125,4 +125,54 @@ i.icon-red{
 }
 .success-amount{
     background-color: #33cd5f !important;
+}
+
+#line {
+    position: absolute;
+    bottom: 147px;
+}
+
+.USD-label{
+    position: absolute; 
+    font-size: 70px;
+    color: #387ef5;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+}
+
+.USD-top{
+    top:30px;
+}
+.USD-bot{
+    top:130px;
+}
+
+i.btn-left{
+    position: absolute;
+    bottom: 104px;
+    left: 10px;
+    padding: 0 20px;
+    color: white;
+    font-size: 34px;
+    z-index: 4;
+}
+
+i.btn-right{
+    position: absolute;
+    bottom: 104px; 
+    right: 10px;  
+    padding: 0 20px;
+    color:white;
+    font-size: 34px;
+    z-index: 4;
+}
+
+#content-price-history{
+    background-color: #000435;
+}
+
+.time-bot{
+    bottom: 96px;
+    font-size: 25px;
 }

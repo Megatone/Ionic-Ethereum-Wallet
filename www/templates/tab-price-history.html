@@ -1,0 +1,12 @@
+<ion-view view-title="Price History">
+    <ion-content id="content-price-history">
+        <h1 class="USD-label USD-top">USD</h1>
+        <h1 class="USD-label USD-bot">{{EtherPriceUSD | number : 2}}</h1>
+        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"
+            chart-dataset-override="datasetOverride" chart-colors="colors" chart-click="onClick">
+        </canvas>      
+        <i class="ion ion-chevron-left btn-left" ng-click="backHistory()"></i>
+        <i class="ion ion-chevron-right btn-right" ng-click="nextHistory()"></i>
+        <h1 class="USD-label time-bot">{{TimeLabels[IndexTimeLabel].label}}</h1>
+    </ion-content>
+</ion-view>

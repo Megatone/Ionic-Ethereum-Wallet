@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule' , 'WalletService' , 'monospaced.qrcode' , 'ngCordova' , 'ngclipboard'])
+var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule' , 'WalletService' , 'monospaced.qrcode' , 'ngCordova' , 'ngclipboard' ,'chart.js'])
 
   .run(function ($ionicPlatform, $rootScope, $state, $location) {
     $ionicPlatform.ready(function () {
@@ -51,6 +51,14 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
           'tab-wallets': {
             templateUrl: 'templates/new-wallet.html',
             controller: 'NewWalletController'
+          }
+        }
+      }).state('tab.price-history', {
+        url: '/priceHistory',
+        views: {
+          'tab-price-history': {
+            templateUrl: 'templates/tab-price-history.html',
+            controller: 'PriceHistoryController'
           }
         }
       });
