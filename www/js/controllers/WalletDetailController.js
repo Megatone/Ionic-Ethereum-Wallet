@@ -1,11 +1,10 @@
-app.controller('WalletDetailController', function ($scope, $rootScope, $state, $stateParams, localStorageService, WalletsService, WalletService, $ionicModal, $q, $cordovaSocialSharing, $cordovaBarcodeScanner) {
+app.controller('WalletDetailController', function ($scope, $rootScope, $state, $stateParams, localStorageService, WalletsService, WalletService, $ionicModal, $q, $cordovaSocialSharing, $cordovaBarcodeScanner, $location) {
 
     $scope.RealWallet = null;
     $scope.wallet = WalletsService.getWallet($stateParams.address);
     $scope.Balance = 0;
     $scope.NumTransactions = 0;
-    $scope.activeModal;
-    $scope.Transactions = [];
+    $scope.activeModal;  
     $scope.EtherPriceUSD = 0;
 
     $scope.InputsModalSetPassword = {
@@ -16,6 +15,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     $scope.InputModalOpenWalletPassword = {
         password: ''
     };
+    
     $scope.InputsSendEtherBase = {
         targetAddress: '',
         amount: 0,
@@ -54,10 +54,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
             $scope.NumTransactions = parseInt(transactionsCount);
             apply();
         });
-        WalletService.getTransactionsHistory(function (transactions) {
-            $scope.Transactions = transactions;
-            apply();
-        });
+    
         WalletService.getGasPrice(function (gasPrice) {
             $scope.InputsSendEtherBase.gasPrice = parseInt(gasPrice * 1);
             $scope.InputsSendEtherBase.transactionCost = ethers.utils.formatEther($scope.InputsSendEtherBase.gasPrice * $scope.InputsSendEtherBase.gasLimit);
@@ -153,19 +150,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         }
     };
 
-    $scope.getDateTransacction = function (timeStamp) {
-        var d = new Date(timeStamp * 1000);
-        return d.toISOString();
-    };
-
-    $scope.attachListToScreen = function () {
-        try {
-
-            document.getElementById("list-transactionHistory").firstChild.style.height = (window.screen.height - 132) + "px !important;";
-
-        } catch (err) { }
-    };
-
+   
     $scope.shareViaWhatsApp = function () {
         try {
             $cordovaSocialSharing.shareViaWhatsApp($scope.wallet.address, document.getElementsByClassName('qrcode-link')[0].href).then(function (result) {
@@ -255,5 +240,9 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         } else {
             return 'success-amount';
         }
+    };
+
+    $scope.openTransactionsHistory = function(){
+        $location.url('/tab/transactions/' + $scope.RealWallet.address );
     };
 });

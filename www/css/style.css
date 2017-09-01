@@ -89,16 +89,7 @@ i.icon-red{
     color:#F53838;
 }
 
-#list-transactionHistory{
-    display: inline-grid !important;
-    overflow-y: hidden !important;
-    overflow-x: hidden !important;
-}
 
-#list-transactionHistory > div.list{    
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
-}
 
 .icon-clipboard-share , .icon-scan-send{
     width: 50px;       

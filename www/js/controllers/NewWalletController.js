@@ -1,4 +1,4 @@
-app.controller('NewWalletController', function ($scope, $rootScope, $state, localStorageService, WalletsService, $ionicModal, $q) {
+app.controller('NewWalletController', function ($scope, $rootScope, $state, localStorageService, WalletsService, $ionicModal) {
     $scope.newWallet = {
         name: '',
         address: '',
@@ -10,6 +10,11 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
         address: '',
         privateKey: '',
         password: ''
+    };
+    $scope.modalNewWalletJSON = {
+        name : '',
+        password : '',
+        config : {}
     };
 
     $scope.createRandomWallet = function () {
@@ -26,22 +31,17 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
 
 
 
-    var init = function () {
-        if ($scope.modal) {
-            return $q.when();
-        }
-        else {
-            return $ionicModal.fromTemplateUrl('modal.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-            })
-        }
+    var init = function (template) {
+        return $ionicModal.fromTemplateUrl(template, {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
     };
 
-    $scope.openModal = function () {
-        init().then(function () {
+    $scope.openModal = function (template) {
+        init(template).then(function () {
             $scope.modal.show();
         });
     };
@@ -51,6 +51,11 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
             name: '',
             address: '',
             privateKey: ''
+        };
+        $scope.modalNewWalletJSON = {
+            name : '',
+            password : '',
+            config : {}
         };
         $scope.modal.hide();
     };
@@ -62,7 +67,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
                 var wallet = new ethers.Wallet($scope.modalNewWallet.privateKey);
                 $scope.modalNewWallet.address = wallet.address;
                 WalletsService.addWallet($scope.modalNewWallet);
-                $scope.modal.hide();
+                $scope.closeModal();
                 $state.go('tab.wallets');
             } catch (err) {
                 alert(err);
@@ -71,4 +76,47 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
             alert("Complete the name field to create wallet");
         }
     };
+
+    $scope.uploadFile = function (event) {
+        var file = event.target.files[0];    
+        var reader = new FileReader();
+
+        reader.onload = (function (theFile) {
+            return function (e) {      
+                var strJson = atob(e.target.result.split(',')[1]);
+                $scope.modalNewWalletJSON.config = JSON.parse(strJson);                          
+            };
+        })(file);
+       
+        reader.readAsDataURL(file);
+    };
+
+    $scope.Importing = false;
+    $scope.ImportWalletFromJsonFile = function(){
+        $scope.Importing = true;
+        try{
+
+        
+        var json = JSON.stringify($scope.modalNewWalletJSON.config);
+        var password = $scope.modalNewWalletJSON.password;
+        ethers.Wallet.fromEncryptedWallet(json, password).then(function(wallet) {
+            var newWalletJSON ={
+                name : $scope.modalNewWalletJSON.name,
+                address : wallet.address,
+                password : $scope.modalNewWalletJSON.password,
+                privateKey : wallet.privateKey
+            };
+            WalletsService.addWallet(newWalletJSON);
+            $scope.Importing = false;
+            $scope.closeModal(); 
+            $state.go('tab.wallets');      
+        });
+        }catch(err){
+            alert('Import Failed');
+            $scope.Importing = false;
+        }
+    };
+   
+
+
 });

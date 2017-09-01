@@ -1,5 +1,6 @@
 angular.module('WalletService', []).service('WalletService', function ($http) {
     this.Wallet = null;
+    var Transactions = null;
 
     this.openWallet = function (privateKey) {
         if (privateKey.substring(0, 2) !== '0x') { privateKey = '0x' + privateKey; }
@@ -7,6 +8,11 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
         this.Wallet.provider = new ethers.providers.getDefaultProvider(false);
         return this.Wallet;
     };
+
+    this.getWallet = function(){
+        return this.Wallet;
+    };
+
     this.closeWallet = function () {
         this.Wallet = null;
     };
@@ -33,9 +39,19 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
             method: 'GET',
             url: 'http://api.etherscan.io/api?module=account&action=txlist&address=' + this.Wallet.address + '&startblock=0&endblock=99999999&sort=desc'
         }).then(function successCallback(response) {
+            Transactions = response.data.result;        
             _callback(response.data.result);
         }, function errorCallback(response) {
         });
+    };
+    this.getTransaction = function(transactionId){
+        for (var i = 0; i < Transactions.length; i++) {
+            if (Transactions[i].hash === transactionId) {
+                console.log(Transactions[i]);
+              return Transactions[i];
+            }
+        }
+        return null;
     };
 
     this.getGasPrice = function (_callback) {

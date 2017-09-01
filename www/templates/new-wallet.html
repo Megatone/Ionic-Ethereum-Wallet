@@ -5,30 +5,8 @@
             <input type="text" ng-model="newWallet.name" placeholder="(Name of new Wallet)">
         </label>
         <button class="button button-block button-positive" ng-click="createRandomWallet()">Create Random Wallet</button>
-        <button class="button button-block button-positive" ng-click="openModal()">Add Wallet From Private Key</button>
+        <button class="button button-block button-positive" ng-click="openModal('templates/modals/modalNewWalletWithPrivateKey.html')">Add Wallet From Private Key</button>    
+        <button class="button button-block button-positive" ng-click="openModal('templates/modals/modalNewWalletWithJsonFile.html')">Import Wallet From JSON File</button>    
         <pre>{{newWallet | json : 4}}</pre>
-
     </ion-content>
 </ion-view>
-<script id="modal.html" type="text/ng-template">
-    <div class="modal">
-        <header class="bar bar-header bar-positive">
-            <h1 class="title">Add Wallet From Private Key</h1>
-            <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
-        </header>
-        <content has-header="true" padding="true">
-            <br>
-            <br>
-            <br>
-            <label class="item item-input">     
-                <ion-label fixed>Name</ion-label> 
-                <input type="text" ng-model="modalNewWallet.name" placeholder="(Name of new Wallet)">
-            </label>
-            <label class="item item-input">     
-                <ion-label fixed>Private Key</ion-label> 
-                <input type="text" ng-model="modalNewWallet.privateKey" placeholder="(Private Key)">
-            </label>
-            <button class="button button-block button-positive" style="position:absolute;bottom:0" ng-click="addWalletFromPrivateKey()">Add Wallet</button>
-        </content>
-    </div>
-</script>

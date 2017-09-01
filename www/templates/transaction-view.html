@@ -1,0 +1,32 @@
+<ion-view view-title="Transaction View">
+    <ion-content>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>Transaction ID :</ion-label> 
+            <input type="text" ng-value="Transaction.hash" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>DATE :</ion-label> 
+            <input type="text" ng-value="getDateTransacction(Transaction.timeStamp) |  date : 'dd/MM/yyyy hh:mm:ss'" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>FROM :</ion-label> 
+            <input type="text" ng-value="Transaction.from" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>TO :</ion-label> 
+            <input type="text" ng-value="Transaction.to" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+        <label class="item item-input item-input-disabled" ng-class="getColorTransactionClass()">     
+            <ion-label fixed>VALUE :</ion-label> 
+            <input type="text" ng-value="getTransactionValue()" ng-disabled="true" class="item-input-disabled" ng-class="getColorTransactionClass()"/>
+        </label>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>TRANSACTION COST :</ion-label> 
+            <input type="text" ng-value="getTransactionCost()" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+        <label class="item item-input item-input-disabled">     
+            <ion-label fixed>BLOCK NUMBER :</ion-label> 
+            <input type="text" ng-value="Transaction.blockNumber" ng-disabled="true" class="item-input-disabled"/>
+        </label>
+    </ion-content>
+</ion-view>

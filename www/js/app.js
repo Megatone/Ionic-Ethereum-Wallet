@@ -35,8 +35,7 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
             controller: 'WalletsController'
           }
         }
-      })
-      .state('tab.wallet-detail', {
+      }).state('tab.wallet-detail', {
         url: '/wallets/:address',
         views: {
           'tab-wallets': {
@@ -44,8 +43,23 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
             controller: 'WalletDetailController'
           }
         }
-      })
-      .state('tab.new-wallet', {
+      }).state('tab.transactions-history', {
+        url: '/transactions/:address',
+        views: {
+          'tab-wallets': {
+            templateUrl: 'templates/transactions-history.html',
+            controller: 'TransactionsHistoryController'
+          }
+        }
+      }).state('tab.transaction-view', {
+        url: '/transaction/:transactionId',
+        views: {
+          'tab-wallets': {
+            templateUrl: 'templates/transaction-view.html',
+            controller: 'TransactionViewController'
+          }
+        }
+      }).state('tab.new-wallet', {
         url: '/newWallet',
         views: {
           'tab-wallets': {
@@ -65,4 +79,14 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/wallets');
 
+  });
+
+  app.directive('customOnChange', function() {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        var onChangeHandler = scope.$eval(attrs.customOnChange);
+        element.bind('change', onChangeHandler);
+      }
+    };
   });

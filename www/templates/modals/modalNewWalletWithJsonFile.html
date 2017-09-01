@@ -1,0 +1,21 @@
+<div class="modal">
+    <header class="bar bar-header bar-positive">
+        <h1 class="title">Import Wallet From JSON File</h1>
+        <div class="button button-clear" ng-click="closeModal()" ng-disabled="Importing"><span class="icon ion-close"></span></div>
+    </header>
+    <content has-header="true" padding="true">
+        <br>
+        <br>
+        <br>
+        <label class="item item-input">     
+            <ion-label fixed>Name</ion-label> 
+            <input type="text" ng-model="modalNewWalletJSON.name" placeholder="(Name of new Wallet)" ng-disabled="Importing">
+        </label>        
+        <input type="file" custom-on-change="uploadFile" ng-disabled="Importing">
+        <label class="item item-input">     
+            <ion-label fixed>Password</ion-label> 
+            <input type="password" ng-model="modalNewWalletJSON.password" placeholder="(Password JSON File)" ng-disabled="Importing">
+        </label>
+        <button class="button button-block button-positive" style="position:absolute;bottom:0" ng-click="ImportWalletFromJsonFile()" ng-disabled="Importing">Import Wallet</button>
+    </content>
+</div>
