@@ -2,13 +2,13 @@
 app.factory('WalletsService', function (localStorageService) {
   var wallets = [];
 
-  function saveWallets(){
+  function saveWallets() {
     localStorageService.set('wallets', wallets, 'localStorage');
   };
 
   return {
-    getWallets: function () {      
-      wallets = (localStorageService.length() > 0) ? localStorageService.get('wallets' , 'localStorage') : [];
+    getWallets: function () {
+      wallets = (localStorageService.length() > 1) ? localStorageService.get('wallets', 'localStorage') : [];
       return wallets;
     },
     removeWallet: function (wallet) {
@@ -24,14 +24,18 @@ app.factory('WalletsService', function (localStorageService) {
       return null;
     },
     addWallet: function (wallet) {
-      wallets.push(wallet);
-      saveWallets();
+      if (this.getWallet(wallet.address) == null) {
+        wallets.push(wallet);
+        saveWallets();
+      } else {
+        alert("This wallet is already registered in the application.");
+      }
     },
-    updateWallet : function(wallet){
+    updateWallet: function (wallet) {
       for (var i = 0; i < wallets.length; i++) {
         if (wallets[i].address === wallet.address) {
-            wallets[i] = wallet;
-            saveWallets();
+          wallets[i] = wallet;
+          saveWallets();
         }
       }
     }

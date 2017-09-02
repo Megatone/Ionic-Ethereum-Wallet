@@ -5,7 +5,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     $scope.Balance = 0;
     $scope.NumTransactions = 0;
     $scope.activeModal;  
-    $scope.EtherPriceUSD = 0;
+    $scope.EtherPrice = 0;
 
     $scope.InputsModalSetPassword = {
         password: '',
@@ -61,14 +61,21 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
             $scope.InputsSendEther = angular.copy($scope.InputsSendEtherBase);
             apply();
         });
-        WalletService.getEtherPriceUSD(function (etherPriceUSD) {
-            $scope.EtherPriceUSD = parseFloat(etherPriceUSD);
+        WalletService.getEtherPrice($rootScope.settings.coin.label , function (etherPrice) {
+            $scope.EtherPrice = parseFloat(etherPrice);
             apply();
         });
     };
+    $rootScope.$watch('settings.coin.label', function (newVal, oldVal) {
+        if (newVal != oldVal) {
+            openWallet();
+        }
+    });
 
-    $scope.getBalanceToUSD = function () {
-        return parseFloat(parseFloat($scope.EtherPriceUSD) * parseFloat($scope.Balance));
+
+
+    $scope.getBalance = function () {
+        return parseFloat(parseFloat($scope.EtherPrice) * parseFloat($scope.Balance));
     };
 
     $scope.setPassword = function () {

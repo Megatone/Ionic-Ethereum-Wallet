@@ -1,4 +1,4 @@
-app.controller('PriceHistoryController', function ($scope, $rootScope, WalletService) {
+app.controller('PriceHistoryController', function ($scope, $rootScope, WalletService, SettingsService) {
 
     $scope.TimeLabels = [{
         days: 30,
@@ -14,9 +14,9 @@ app.controller('PriceHistoryController', function ($scope, $rootScope, WalletSer
     $scope.IndexTimeLabel = 0;
 
 
-    $scope.EtherPriceUSD = 0
+    $scope.EtherPrice = 0
     $scope.labels = [];
-    $scope.series = ['USD'];
+    $scope.series = [$rootScope.settings.coin.label];
     $scope.data = [[]];
 
     $scope.colors = ["#387ef5"];
@@ -30,36 +30,45 @@ app.controller('PriceHistoryController', function ($scope, $rootScope, WalletSer
     init();
     function init() {
         getEtherPriceHistory();
-        refreshEtherPriceUSD();
+        refreshEtherPrice();
     };
 
     function getEtherPriceHistory() {
         $scope.labels = [];
         $scope.data[0] = [];
         var days = $scope.TimeLabels[$scope.IndexTimeLabel].days;
-        WalletService.getETHPriceHistory(days, function (data) {
+        WalletService.getETHPriceHistory($rootScope.settings.coin.label , days, function (data) {
             for (var i = 0; i <= data.length - 1; i++) {
                 var d = new Date(data[i].time * 1000);
                 var yyyy = d.getFullYear().toString();
                 var MM = (d.getMonth() + 101).toString().slice(-2);
                 var dd = (d.getDate() + 100).toString().slice(-2);
                 var hh = (d.getHours()).toString().slice(-2);
-              
 
-                $scope.labels.push((days == 1) ?dd + '-' + MM + '-' + yyyy + ' '+ hh + ':00': dd + '-' + MM + '-' + yyyy);
+                $scope.labels.push((days == 1) ? dd + '-' + MM + '-' + yyyy + ' ' + hh + ':00' : dd + '-' + MM + '-' + yyyy);
                 $scope.data[0].push(data[i].close);
             }
         });
     };
 
-    function refreshEtherPriceUSD() {
-        WalletService.getEtherPriceUSD(function (etherPriceUSD) {
-            $scope.EtherPriceUSD = etherPriceUSD;
+    function refreshEtherPrice() {
+        WalletService.getEtherPrice($rootScope.settings.coin.label, function (etherPrice) {
+            $scope.EtherPrice = etherPrice;
         });
         setTimeout(function () {
-            refreshEtherPriceUSD();
-        }, 3000);
+            refreshEtherPrice();
+        }, 10000);
     };
+
+    $rootScope.$watch('settings.coin.label', function (newVal, oldVal) {
+        if (newVal != oldVal) {
+            WalletService.getEtherPrice($rootScope.settings.coin.label, function (etherPrice) {
+                $scope.EtherPrice = etherPrice;
+            });
+            $scope.series = [$rootScope.settings.coin.label];
+            getEtherPriceHistory();
+        }
+    });
 
     $scope.backHistory = function () {
         $scope.IndexTimeLabel = ($scope.IndexTimeLabel == 0) ? $scope.TimeLabels.length - 1 : $scope.IndexTimeLabel - 1;

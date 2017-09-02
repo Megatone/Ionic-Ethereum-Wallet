@@ -62,12 +62,13 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
         });
     };
 
-    this.getEtherPriceUSD = function (_callback) {
+    this.getEtherPrice = function ( coin , _callback) {
         $http({
             method: 'GET',
-            url: 'http://api.etherscan.io/api?module=stats&action=ethprice'
+            url: 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR'
         }).then(function successCallback(response) {
-            _callback(response.data.result.ethusd);
+            console.log(response);
+            _callback(response.data[coin]);
         }, function errorCallback(response) {
         });
     };
@@ -84,10 +85,10 @@ angular.module('WalletService', []).service('WalletService', function ($http) {
         });
     };
 
-    this.getETHPriceHistory = function (days, _callback) {
-        var url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=' + days + '&aggregate=1&e=Kraken';
+    this.getETHPriceHistory = function ( coin , days, _callback) {
+        var url = 'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym='+coin+'&limit=' + days + '&aggregate=1&e=Kraken';
         if (days == 1) {
-            url = 'https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=24&aggregate=1&e=Kraken';
+            url = 'https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym='+coin+'&limit=24&aggregate=1&e=Kraken';
         }
         $http({
             method: 'GET',

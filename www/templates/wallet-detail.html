@@ -11,7 +11,7 @@
     </label>
     <label class="item item-input item-input-disabled">     
         <ion-label fixed>USD :</ion-label> 
-        <input type="text" value="{{getBalanceToUSD() | number : 2}} $" ng-disabled="true" class="item-input-disabled"/>
+        <input type="text" value="{{getBalance() | number : 2}} {{settings.coin.simbol}}" ng-disabled="true" class="item-input-disabled"/>
       </label>
     <label class="item item-input item-input-disabled">     
       <ion-label fixed>Transactions :</ion-label> 

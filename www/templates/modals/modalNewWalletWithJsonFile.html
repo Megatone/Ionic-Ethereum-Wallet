@@ -10,8 +10,13 @@
         <label class="item item-input">     
             <ion-label fixed>Name</ion-label> 
             <input type="text" ng-model="modalNewWalletJSON.name" placeholder="(Name of new Wallet)" ng-disabled="Importing">
-        </label>        
-        <input type="file" custom-on-change="uploadFile" ng-disabled="Importing">
+        </label>     
+        <label class="item item-input">     
+                <ion-label fixed>File</ion-label> 
+                <input type="text" ng-model="FileName" placeholder="..." ng-disabled="true">
+            </label>   
+        <button class="button button-block button-positive"  ng-click="openExplorer()" ng-disabled="Importing">Open File</button>
+        <input type="file" custom-on-change="uploadFile" ng-disabled="Importing" style="display:none" id="inputfile">
         <label class="item item-input">     
             <ion-label fixed>Password</ion-label> 
             <input type="password" ng-model="modalNewWalletJSON.password" placeholder="(Password JSON File)" ng-disabled="Importing">

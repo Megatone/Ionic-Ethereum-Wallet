@@ -1,0 +1,17 @@
+<ion-view view-title="Settings">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">Language</div>
+               <select ng-model="Settings.language"  ng-options="language as language.label for language in Languages" ng-change="settingsChanged()">
+              
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">Coin</div>
+                <select ng-model="Settings.coin"  ng-options="coin as coin.label for coin in Coins" ng-change="settingsChanged()">             
+                </select>
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

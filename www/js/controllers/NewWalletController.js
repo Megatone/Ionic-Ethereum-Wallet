@@ -16,6 +16,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
         password : '',
         config : {}
     };
+    $scope.FileName = '';
 
     $scope.createRandomWallet = function () {
         if ($scope.newWallet.name != '') {
@@ -57,6 +58,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
             password : '',
             config : {}
         };
+        $scope.FileName  = '';
         $scope.modal.hide();
     };
 
@@ -78,7 +80,9 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
     };
 
     $scope.uploadFile = function (event) {
-        var file = event.target.files[0];    
+        var file = event.target.files[0];   
+        $scope.FileName = file.name; 
+        $scope.$apply();
         var reader = new FileReader();
 
         reader.onload = (function (theFile) {
@@ -94,9 +98,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
     $scope.Importing = false;
     $scope.ImportWalletFromJsonFile = function(){
         $scope.Importing = true;
-        try{
-
-        
+        try{        
         var json = JSON.stringify($scope.modalNewWalletJSON.config);
         var password = $scope.modalNewWalletJSON.password;
         ethers.Wallet.fromEncryptedWallet(json, password).then(function(wallet) {
@@ -117,6 +119,8 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
         }
     };
    
-
+    $scope.openExplorer = function(){
+        document.getElementById('inputfile').click();
+    };
 
 });

@@ -1,6 +1,7 @@
 var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule' , 'WalletService' , 'monospaced.qrcode' , 'ngCordova' , 'ngclipboard' ,'chart.js'])
 
-  .run(function ($ionicPlatform, $rootScope, $state, $location) {
+  .run(function ($ionicPlatform, $rootScope, $state, $location , SettingsService) {
+    $rootScope.settings = angular.copy(SettingsService.getSettings());
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -12,10 +13,10 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
-      }
+      }    
     });
   })
-  .config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider ) {    
     localStorageServiceProvider
       .setPrefix('IonicEthereumWallet2')
       .setStorageType('localStorage');
@@ -73,6 +74,14 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
           'tab-price-history': {
             templateUrl: 'templates/tab-price-history.html',
             controller: 'PriceHistoryController'
+          }
+        }
+      }).state('tab.settings', {
+        url: '/settings',
+        views: {
+          'tab-settings': {
+            templateUrl: 'templates/tab-settings.html',
+            controller: 'SettingsController'
           }
         }
       });
