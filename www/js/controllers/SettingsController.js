@@ -42,14 +42,12 @@ app.controller('SettingsController', function ($scope, $rootScope, SettingsServi
         return o;
     };
 
-   // apply(function(){TranslationService.getTranslation($scope, $rootScope.settings.language.id)});
-    function apply(_callback) {
+ 
+    function apply() {
         try {
             if (!$scope.$$phase) {               
-                $scope.$apply(_callback);
-            } else{
-                setTimeout(function(){apply(_callback)},51);
-            }
+                $scope.$apply();
+            } 
         } catch (err) {
         }
     };

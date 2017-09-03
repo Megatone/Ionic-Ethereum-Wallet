@@ -5,6 +5,12 @@
     "TRANSACTIONS_TITLE" : "Transactions History",
     "TRANSACTION_VIEW_TITLE": "Transaction View",
     "IMPORT_WALLET_JSON_TITLE" : "Import Wallet From JSON File",
+    "SHARE_TITLE" : "Share Address",
+    "ADD_PASSWORD_TITLE" : "Add Password to Wallet",
+    "SEND_ETHER_TITLE" : "Send Ether",
+    "REMOVE_WALLET_TITLE" : "Remove Wallet",
+    "OPEN_PASSWORD_TITLE" : "Open Wallet Password",
+    "ADD_WALLET_PRIVATE_KEY_TITLE" :"Add Wallet From Private Key",
     "Language": "Language",
     "Coin": "Coin",
     "WALLETS_TITLE": "Wallets",
@@ -47,6 +53,20 @@
     "Calculating" : "Calculating",
     "EnterPositiveAmount" : "Please enter positive amout.",
     "TotalTransactionMoreBalance" : "Total Transaction amount is more that your balance",
-    "AlertCompleteNameField":"Complete the name field to create wallet"
+    "AlertCompleteNameField":"Complete the name field to create wallet",
+    "ShareWithWhatsApp" : "Share with WhatsApp",
+    "Repeat" : "Repeat",
+    "btnSetPassword" : "Set Password",
+    "placeHolderPassword" : "(Password)",
+    "placeHolderRepeatPassword" : "(Repeat Password)",
+    "TargetAddress" : "Target Address",
+    "Amount" : "Amount",
+    "Total" : "Total",
+    "btnSendEther" : " Send Ether",
+    "RemoveWalletQuestion":"Are you sure remove wallet from this application?",
+    "btnOpenWallet" : "Open Wallet",
+    "placeHolderPrivateKey" : "(Private Key)",
+    "btnAddWallet" : "Add Wallet"
+
 
 }
