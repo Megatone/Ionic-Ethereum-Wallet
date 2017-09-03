@@ -78,6 +78,6 @@ app.controller('PriceHistoryController', function ($scope, $rootScope, WalletSer
     $scope.nextHistory = function () {
         $scope.IndexTimeLabel = ($scope.IndexTimeLabel == $scope.TimeLabels.length - 1) ? 0 : $scope.IndexTimeLabel = $scope.IndexTimeLabel + 1;
         getEtherPriceHistory();
-    };
+    };   
 
 });
