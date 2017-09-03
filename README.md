@@ -21,3 +21,11 @@ These instructions will get you a copy of the project up and running on your loc
 ## Screenshots
 
 ![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/wallets.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/newWallet.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/walletDetail.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/sendEther.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/transactions.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/transactionDetail.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/shareAddress.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/priceHistory.PNG?raw=true)
+![](https://github.com/Megatone/Ionic-Ethereum-Wallet/blob/master/screenshots/settings.PNG?raw=true)
