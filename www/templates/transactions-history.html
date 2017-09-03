@@ -1,16 +1,17 @@
-<ion-view view-title="Transactions History">
-    <ion-content >
+<ion-view view-title="{{'TRANSACTIONS_TITLE' | translate}}">
+    <ion-content>
         <ion-list>
-            <ion-item class="item-remove-animate"  type="item-text-wrap" ng-if="Transactions.length == 0" >
-                <p><b>This account haven´t transactions</b></p>
-            </ion-item>  
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="transaction in Transactions" type="item-text-wrap" ng-click="openTransactionView(transaction.hash)">
+            <ion-item class="item-remove-animate" type="item-text-wrap" ng-if="Transactions.length == 0">
+                <p><b>{{'NoTransactions' | translate}}</b></p>
+            </ion-item>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="transaction in Transactions" type="item-text-wrap"
+                ng-click="openTransactionView(transaction.hash)">
                 <i class="icon icon-left ion-plus-circled icon-green" ng-if="transaction.to.toUpperCase() == wallet.address.toUpperCase()"></i>
                 <i class="icon icon-left ion-minus-circled icon-red" ng-if="transaction.to.toUpperCase() != wallet.address.toUpperCase()"></i>
-                <p><b>Date :</b> {{getDateTransacction(transaction.timeStamp) | date : 'dd/MM/yyyy hh:mm:ss'}}</p>
-                <p><b>From :</b> {{transaction.from}}</p>
-                <p><b>To :</b> {{transaction.to}}</p>
-            </ion-item>                 
+                <p><b>{{'Date' | translate}} :</b> {{getDateTransacction(transaction.timeStamp) | date : 'dd/MM/yyyy hh:mm:ss'}}</p>
+                <p><b>{{'From' | translate}} :</b> {{transaction.from}}</p>
+                <p><b>{{'To' | translate}} :</b> {{transaction.to}}</p>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

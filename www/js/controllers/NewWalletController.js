@@ -1,4 +1,4 @@
-app.controller('NewWalletController', function ($scope, $rootScope, $state, localStorageService, WalletsService, $ionicModal) {
+app.controller('NewWalletController', function ($scope, $rootScope, $state, localStorageService, WalletsService, $ionicModal , $translate) {
     $scope.newWallet = {
         name: '',
         address: '',
@@ -7,7 +7,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
     };
     $scope.modalNewWallet = {
         name: '',
-        address: '',
+        address: '',  
         privateKey: '',
         password: ''
     };
@@ -26,7 +26,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
             WalletsService.addWallet($scope.newWallet);
             $state.go('tab.wallets');
         } else {
-            alert("Complete the name field to create wallet");
+            alert($translate.instant('AlertCompleteNameField'));
         }
     };
 
@@ -75,7 +75,7 @@ app.controller('NewWalletController', function ($scope, $rootScope, $state, loca
                 alert(err);
             }
         } else {
-            alert("Complete the name field to create wallet");
+            alert($translate.instant('AlertCompleteNameField'));
         }
     };
 

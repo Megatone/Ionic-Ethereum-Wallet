@@ -1,4 +1,4 @@
-app.controller('WalletDetailController', function ($scope, $rootScope, $state, $stateParams, localStorageService, WalletsService, WalletService, $ionicModal, $q, $cordovaSocialSharing, $cordovaBarcodeScanner, $location) {
+app.controller('WalletDetailController', function ($scope, $rootScope, $state, $stateParams, localStorageService, WalletsService, WalletService, $ionicModal, $q, $cordovaSocialSharing, $cordovaBarcodeScanner, $location , $translate) {
 
     $scope.RealWallet = null;
     $scope.wallet = WalletsService.getWallet($stateParams.address);
@@ -84,7 +84,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
             WalletsService.updateWallet($scope.wallet);
             $scope.closeModal();
         } else {
-            alert("Complete passwords fields with same text for set password on wallet");
+            alert($translate.instant('AlertCompletePasswords'));
         }
     };
 
@@ -92,7 +92,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         $scope.wallet.password = '';
         WalletsService.updateWallet($scope.wallet);
         $scope.closeModal();
-        alert("now the wallet haven't password");
+        alert($translate.instant('AlertPasswordRemoved'));
     };
 
     $scope.reloadWallet = function () {
@@ -139,11 +139,11 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
                 openWallet();
                 $scope.closeModal();
             } else {
-                alert('The password is not correct.');
+                alert($translate.instant('PasswordNotCorrect'));
                 $scope.closeModalOpenWalletPassword();
             }
         } else {
-            alert('Enter the password field');
+            alert($translate.instant('CompletePassword'));
         }
     };
 
@@ -160,13 +160,12 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
    
     $scope.shareViaWhatsApp = function () {
         try {
-            $cordovaSocialSharing.shareViaWhatsApp($scope.wallet.address, document.getElementsByClassName('qrcode-link')[0].href).then(function (result) {
-                alert("Shared address on WhatsApp");
+            $cordovaSocialSharing.shareViaWhatsApp($scope.wallet.address, document.getElementsByClassName('qrcode-link')[0].href).then(function (result) {                
             }, function (err) {
-                alert("Cannot share on WhatsApp");
+                alert($translate.instant('CannotShareWhatsApp'));
             });
         } catch (err) {
-            alert("WhatsApp not suported" + err);
+            alert($translate.instant('WhatsAppNotSuported') + err);
         }
     };
 
@@ -178,7 +177,7 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
                 alert(err);
             });
         } catch (err) {
-            alert('Scan Code not Suported' + err);
+            alert($translate.instant('ScanCodeNotSuported') + err);
         }
     };
 
@@ -196,13 +195,13 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         try {
             var result = parseFloat(parseFloat($scope.InputsSendEther.amount) + parseFloat($scope.InputsSendEther.transactionCost));
             if (isNaN(result)) {
-                return 'Calculating...';
+                return $translate.instant('Calculating') + '...';
             } else {
                 return result;
             }
         }
         catch (err) {
-            return 'Calculating...';
+            return $translate.instant('Calculating') + '...';
         }
     };
 
@@ -220,9 +219,9 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
         try {
             ethers.utils.getAddress($scope.InputsSendEther.targetAddress);
             if ($scope.InputsSendEther.amount <= 0)
-                throw "Error : Please enter positive amout.";
+                throw "Error : " + $translate.instant('EnterPositiveAmount');
             if (parseFloat($scope.getTotalTransactionCost()) > parseFloat($scope.Balance))
-                throw "Error : Total Transaction amount is more that your balance";
+                throw "Error : " + $translate.instant('TotalTransactionMoreBalance');
         } catch (error) {
             alert(error);
             return false;
