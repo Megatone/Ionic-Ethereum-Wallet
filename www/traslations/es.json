@@ -1,7 +1,17 @@
 {
     "SETTINGS_TITLE" : "Ajustes",
     "PRICE_TITLE" : "Historial Precio",
+    "NEW_WALLET_TITLE" : "Nuevo Monedero",
     "Language" : "Idioma",
     "Coin" : "Moneda",
-    "WALLETS_TITLE" : "Monederos"
+    "WALLETS_TITLE" : "Monederos",
+    "MONTH" : "MES",
+    "YEAR" : "AÑO",
+    "DAY" : "DÍA",
+    "name" : "Nombre",
+    "btnRandomWallet" : "Crear Monedero Aleatorio",
+    "btnPrivateKeyWallet" : "Abrir Monedero con Clave Privada",
+    "placeHolderNameWallet" : "(Nombre del Monedero)",
+    "btnImportJSONWallet" : "Importar Monedero Desde Archivo JSON"
+
 }

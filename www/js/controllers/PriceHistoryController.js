@@ -1,15 +1,15 @@
-app.controller('PriceHistoryController', function ($scope, $rootScope, WalletService, SettingsService) {
+app.controller('PriceHistoryController', function ($scope, $rootScope, WalletService, SettingsService ,$translate) {
 
     $scope.TimeLabels = [{
         days: 30,
-        label: 'MONTH'
+        label: $translate.instant('MONTH')
     }, {
         days: 365,
-        label: 'YEAR'
+        label: $translate.instant('YEAR')
     }, {
         days: 1,
-        label: 'DAY'
-    }];
+        label: $translate.instant('DAY')
+    }]; 
 
     $scope.IndexTimeLabel = 0;
 
@@ -53,7 +53,7 @@ app.controller('PriceHistoryController', function ($scope, $rootScope, WalletSer
 
     function refreshEtherPrice() {
         WalletService.getEtherPrice($rootScope.settings.coin.label, function (etherPrice) {
-            $scope.EtherPrice = etherPrice;
+            $scope.EtherPrice = etherPrice;                 
         });
         setTimeout(function () {
             refreshEtherPrice();
@@ -68,6 +68,19 @@ app.controller('PriceHistoryController', function ($scope, $rootScope, WalletSer
             $scope.series = [$rootScope.settings.coin.label];
             getEtherPriceHistory();
         }
+    });
+
+    $rootScope.$watch("settings.language.id" , function(oldVal , newVal){
+        $scope.TimeLabels = [{
+            days: 30,
+            label: $translate.instant('MONTH')
+        }, {
+            days: 365,
+            label: $translate.instant('YEAR')
+        }, {
+            days: 1,
+            label: $translate.instant('DAY')
+        }];
     });
 
     $scope.backHistory = function () {

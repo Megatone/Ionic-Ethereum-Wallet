@@ -1,11 +1,11 @@
-<ion-view view-title="New Wallet">
+<ion-view view-title="{{'NEW_WALLET_TITLE' | translate}}">
     <ion-content class="padding">
         <label class="item item-input">     
-            <ion-label fixed>Name</ion-label> 
-            <input type="text" ng-model="newWallet.name" placeholder="(Name of new Wallet)">
+            <ion-label fixed>{{'name' | translate}}</ion-label> 
+            <input type="text" ng-model="newWallet.name" placeholder="{{'placeHolderNameWallet' | translate}}">
         </label>
-        <button class="button button-block button-positive" ng-click="createRandomWallet()">Create Random Wallet</button>
-        <button class="button button-block button-positive" ng-click="openModal('templates/modals/modalNewWalletWithPrivateKey.html')">Add Wallet From Private Key</button>    
-        <button class="button button-block button-positive" ng-click="openModal('templates/modals/modalNewWalletWithJsonFile.html')">Import Wallet From JSON File</button>   
+        <button class="button button-block button-positive" ng-click="createRandomWallet()">{{'btnRandomWallet' | translate}}</button>
+        <button class="button button-block button-positive" ng-click="openModal('templates/modals/modalNewWalletWithPrivateKey.html')">{{'btnPrivateKeyWallet' | translate}}</button>    
+        <button class="button button-block button-positive" ng-click="openModal('templates/modals/modalNewWalletWithJsonFile.html')">{{'btnImportJSONWallet' | translate}}</button>   
     </ion-content>
 </ion-view>

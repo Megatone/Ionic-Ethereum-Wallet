@@ -1,7 +1,16 @@
 {
     "SETTINGS_TITLE" : "Settings",
     "PRICE_TITLE" : "Price History",
+    "NEW_WALLET_TITLE" : "New Wallet",
     "Language" : "Language",
     "Coin" : "Coin",
-    "WALLETS_TITLE" : "Wallets"
+    "WALLETS_TITLE" : "Wallets",
+    "MONTH" : "MONTH",
+    "YEAR" : "YEAR",
+    "DAY" : "DAY",
+    "name" : "Name",
+    "btnRandomWallet" : "Create Random Wallet",
+    "btnPrivateKeyWallet" : "Open Wallet With Private Key",
+    "placeHolderNameWallet" : "(Name of new Wallet)",
+    "btnImportJSONWallet" : "Import Wallet From JSON File"
 }
