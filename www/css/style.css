@@ -167,3 +167,11 @@ i.btn-right{
     bottom: 96px;
     font-size: 25px;
 }
+
+
+.div-btn-tool {
+    background: #387ef5;
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+}

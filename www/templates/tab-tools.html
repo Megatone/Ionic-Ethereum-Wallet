@@ -1,0 +1,38 @@
+<ion-view view-title="{{'TOOLS_TITLE' | translate}}">
+    <ion-content>
+        <ul class="list">
+            <li class="item div-btn-tool">
+                {{'PRICE_IN' | translate}} {{settings.coin.label}}
+            </li>
+            <li class="item">
+                <center>1 ETH = {{EtherPrice}} {{settings.coin.simbol}}</center>
+            </li>
+            <li class="item div-btn-tool">
+                ETH <i class="ion-arrow-right-c"></i> {{settings.coin.label}}
+            </li>
+            <li class="item">
+                <label class="item item-input">     
+                    <ion-label fixed>ETH :</ion-label> 
+                    <input type="number" ng-model="ToolETHFIAT.eth" ng-change="ethToFiat()"/>
+                </label>
+                <label class="item item-input item-input-disabled">     
+                    <ion-label fixed>{{settings.coin.label}} :</ion-label> 
+                    <input type="text" ng-value="ToolETHFIAT.fiat + ' ' +  settings.coin.simbol" ng-disabled="true" class="item-input-disabled"/>
+                </label>
+            </li>
+            <li class="item div-btn-tool">
+                {{settings.coin.label}} <i class="ion-arrow-right-c"></i> ETH
+            </li>
+            <li class="item">
+                <label class="item item-input">     
+                    <ion-label fixed>{{settings.coin.label}} :</ion-label> 
+                    <input type="number" ng-model="ToolFIATETH.fiat" ng-change="fiatToEth()"/>
+                </label>
+                <label class="item item-input item-input-disabled">     
+                    <ion-label fixed>ETH :</ion-label> 
+                    <input type="text" ng-value="ToolFIATETH.eth" ng-disabled="true" class="item-input-disabled"/>
+                </label>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

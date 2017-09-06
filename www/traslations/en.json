@@ -11,6 +11,7 @@
     "REMOVE_WALLET_TITLE" : "Remove Wallet",
     "OPEN_PASSWORD_TITLE" : "Open Wallet Password",
     "ADD_WALLET_PRIVATE_KEY_TITLE" :"Add Wallet From Private Key",
+    "TOOLS_TITLE" : "Tools",
     "Language": "Language",
     "Coin": "Coin",
     "WALLETS_TITLE": "Wallets",
@@ -66,7 +67,6 @@
     "RemoveWalletQuestion":"Are you sure remove wallet from this application?",
     "btnOpenWallet" : "Open Wallet",
     "placeHolderPrivateKey" : "(Private Key)",
-    "btnAddWallet" : "Add Wallet"
-
-
+    "btnAddWallet" : "Add Wallet",
+    "PRICE_IN" : "PRICE IN"
 }

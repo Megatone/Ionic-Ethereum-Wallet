@@ -77,6 +77,14 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
             controller: 'PriceHistoryController'
           }
         }
+      }).state('tab.tools', {
+        url: '/tools',
+        views: {
+          'tab-tools': {
+            templateUrl: 'templates/tab-tools.html',
+            controller: 'ToolsController'
+          }
+        }
       }).state('tab.settings', {
         url: '/settings',
         views: {

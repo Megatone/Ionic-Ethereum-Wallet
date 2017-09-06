@@ -10,6 +10,7 @@
     "SEND_ETHER_TITLE" : "Enviar Ether",
     "REMOVE_WALLET_TITLE" : "Eliminar Monedero",
     "OPEN_PASSWORD_TITLE" : "Abrir Monedero con Contraseña",
+    "TOOLS_TITLE" : "Herramientas",
     "Language": "Idioma",
     "Coin": "Moneda",
     "WALLETS_TITLE": "Monederos",
@@ -66,5 +67,6 @@
     "RemoveWalletQuestion":"¿Estas seguro que deseas eliminar el monedero de la aplicación?",
     "btnOpenWallet" : "Abrir Monedero",
     "placeHolderPrivateKey" : "(Clave Privada)",
-    "btnAddWallet" : "Añadir Monedero"
+    "btnAddWallet" : "Añadir Monedero",
+    "PRICE_IN" : "PRECIO EN"
 }
