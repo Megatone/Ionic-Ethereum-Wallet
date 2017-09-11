@@ -4,8 +4,14 @@ app.controller('WalletsController', function ($scope, $rootScope, $state, localS
     };
 
     $scope.wallets = WalletsService.getWallets();
+
+
+   
     $scope.getAvatar = function (address) {
-        var pattern = GeoPattern.generate(address);
-        return pattern.toDataUrl();
+        if($rootScope.settings.avatars.id ==0){
+            return GeoPattern.generate(address).toDataUrl();
+        }else{
+            return 'url(' + blockies.create({ seed:address.toLowerCase()}).toDataURL() + ')';
+        }
     };
 });

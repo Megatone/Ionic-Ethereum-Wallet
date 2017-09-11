@@ -13,6 +13,10 @@ app.factory('SettingsService', function (localStorageService, $rootScope) {
                     }, language: {
                         id: 'en',
                         label: 'English'
+                    },
+                    avatars : {
+                        id : 0,
+                        label :'Geopattern'
                     }
                 };    
             localStorageService.set('settings', settings, 'localStorage');          

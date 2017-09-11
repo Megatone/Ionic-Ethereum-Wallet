@@ -26,8 +26,11 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     };
 
     $scope.getAvatar = function () {
-        var pattern = GeoPattern.generate($stateParams.address);
-        return pattern.toDataUrl();
+        if($rootScope.settings.avatars.id ==0){
+            return GeoPattern.generate($stateParams.address).toDataUrl();
+        }else{
+            return 'url(' + blockies.create({ seed:$stateParams.address.toLowerCase()}).toDataURL() + ')';
+        }
     };
 
     $scope.removeWallet = function () {

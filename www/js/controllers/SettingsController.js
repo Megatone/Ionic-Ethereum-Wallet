@@ -22,18 +22,29 @@ app.controller('SettingsController', function ($scope, $rootScope, SettingsServi
         }
     ];
 
+    $scope.Avatars = [
+        {
+            id: 0,
+            label: 'Geopattern'
+        }, {
+            id: 1,
+            label: 'Blockies'
+        }
+    ];
+
     
 
     var storageSetting = SettingsService.getSettings();
 
     $scope.Settings = {
         coin: filter($scope.Coins, storageSetting.coin),
-        language: filter($scope.Languages, storageSetting.language)
+        language: filter($scope.Languages, storageSetting.language),
+        avatars : filter($scope.Avatars , storageSetting.avatars)
     };
     $scope.settingsChanged = function () {
         SettingsService.setSettings($scope.Settings);
         $rootScope.settings = angular.copy(SettingsService.getSettings());
-        $translate.use( $rootScope.settings.language.id);
+        $translate.use($rootScope.settings.language.id);
         apply();
     };
 

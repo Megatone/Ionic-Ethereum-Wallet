@@ -12,6 +12,11 @@
                 <select ng-model="Settings.coin"  ng-options="coin as coin.label for coin in Coins" ng-change="settingsChanged()">             
                 </select>
             </label>
+            <label class="item item-input item-select">
+                <div class="input-label">Avatars</div>
+                <select ng-model="Settings.avatars"  ng-options="avatar as avatar.label for avatar in Avatars" ng-change="settingsChanged()">             
+                </select>
+            </label>
         </div>
     </ion-content>
 </ion-view>
