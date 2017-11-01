@@ -1,5 +1,5 @@
 <ion-view view-title="{{wallet.name}}">
-  <ion-content class="padding" id="walletScreen">
+  <ion-content class="padding" id="walletScreen" ng-if="canOpen">
     <div id="avatar" style="background-image:{{getAvatar()}}"></div>
     <label class="item item-input item-input-disabled">     
       <ion-label fixed>{{'Address' | translate}} :</ion-label> 
@@ -34,5 +34,9 @@
     <button class="button button-positive icon ion-unlocked" style="left:224px;" ng-click="openModal('templates/modals/modalSetPasswordWallet.html')"
       ng-if="wallet.password == ''"></button>
     <button class="button button-positive icon ion-trash-a" style="left:280px;" ng-click="openModal('templates/modals/modalRemoveWallet.html')"></button>
+  </ion-content>
+  <ion-content class="padding" id="walletScreen" ng-if="!canOpen">
+    <p>Bad Password</p>
+    <button class="button button-positive" ng-click="back()">Back</button>
   </ion-content>
 </ion-view>
