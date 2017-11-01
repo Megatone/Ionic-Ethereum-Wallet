@@ -1,4 +1,4 @@
-app.controller('SettingsController', function ($scope, $rootScope, SettingsService, $filter ,$translate) {
+app.controller('SettingsController', function ($scope, $rootScope, SettingsService, $filter ,$translate , FirebaseService) {
 
     $scope.Coins = [
         {
@@ -32,6 +32,10 @@ app.controller('SettingsController', function ($scope, $rootScope, SettingsServi
         }
     ];
 
+    FirebaseService.getSettings(function(settings){
+        $scope.NotificationSettings = settings;
+        $scope.$apply();
+    });
     
 
     var storageSetting = SettingsService.getSettings();
@@ -39,13 +43,20 @@ app.controller('SettingsController', function ($scope, $rootScope, SettingsServi
     $scope.Settings = {
         coin: filter($scope.Coins, storageSetting.coin),
         language: filter($scope.Languages, storageSetting.language),
-        avatars : filter($scope.Avatars , storageSetting.avatars)
+        avatars : filter($scope.Avatars , storageSetting.avatars)       
     };
+
     $scope.settingsChanged = function () {
         SettingsService.setSettings($scope.Settings);
         $rootScope.settings = angular.copy(SettingsService.getSettings());
         $translate.use($rootScope.settings.language.id);
         apply();
+    };
+
+    $scope.firebaseSettingsChanged = function(){
+        if(!$scope.NotificationSettings.status)
+            $scope.NotificationSettings.timestamp = 0;        
+        FirebaseService.setSettings($scope.NotificationSettings);
     };
 
     function filter(list, obj) {

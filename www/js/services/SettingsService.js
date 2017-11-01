@@ -17,7 +17,7 @@ app.factory('SettingsService', function (localStorageService, $rootScope) {
                     avatars : {
                         id : 0,
                         label :'Geopattern'
-                    }
+                    }                  
                 };    
             localStorageService.set('settings', settings, 'localStorage');          
             return settings;

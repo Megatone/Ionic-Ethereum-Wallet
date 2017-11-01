@@ -3,8 +3,7 @@
         <div class="list">
             <label class="item item-input item-select">
                 <div class="input-label">{{'Language' | translate}}</div>
-               <select ng-model="Settings.language"  ng-options="language as language.label for language in Languages" ng-change="settingsChanged()">
-              
+               <select ng-model="Settings.language"  ng-options="language as language.label for language in Languages" ng-change="settingsChanged()">              
                 </select>
             </label>
             <label class="item item-input item-select">
@@ -16,6 +15,23 @@
                 <div class="input-label">Avatars</div>
                 <select ng-model="Settings.avatars"  ng-options="avatar as avatar.label for avatar in Avatars" ng-change="settingsChanged()">             
                 </select>
+            </label>
+            <label class="item item-input ">
+                <div class="input-label">Notification Status</div>
+                <label class="toggle toggle-notification">
+                    <input type="checkbox" ng-model="NotificationSettings.status" ng-change="firebaseSettingsChanged()">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </label>
+            <label class="item item-input" ng-if="NotificationSettings.status">     
+                <ion-label fixed>Max Price Notification ($) : </ion-label> 
+                <input type="number" ng-model="NotificationSettings.max" ng-change="firebaseSettingsChanged()"/>
+            </label>
+            <label class="item item-input" ng-if="NotificationSettings.status">     
+                <ion-label fixed>Min Price Notification ($) : </ion-label> 
+                <input type="number" ng-model="NotificationSettings.min" ng-change="firebaseSettingsChanged()"/>
             </label>
         </div>
     </ion-content>

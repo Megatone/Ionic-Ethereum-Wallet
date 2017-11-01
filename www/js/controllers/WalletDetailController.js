@@ -99,7 +99,11 @@ app.controller('WalletDetailController', function ($scope, $rootScope, $state, $
     };
 
     $scope.reloadWallet = function () {
-        openWallet();
+        if ($scope.wallet.password !== '') {
+            $scope.openModal('templates/modals/modalOpenWalletPassword.html');
+        } else {
+            openWallet();
+        }
     };
 
     var initModal = function (templateUrl) {

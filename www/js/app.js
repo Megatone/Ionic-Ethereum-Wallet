@@ -1,15 +1,28 @@
 var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModule', 'WalletService', 'monospaced.qrcode', 'ngCordova', 'ngclipboard', 'chart.js', 'pascalprecht.translate'])
 
-  .run(function ($ionicPlatform, $rootScope, $state, $location, SettingsService , $translate) {
+  .run(function ($ionicPlatform, $rootScope, $state, $location, SettingsService, $translate, FirebaseService, $cordovaDevice) {
     $rootScope.settings = angular.copy(SettingsService.getSettings());
-    $translate.use( $rootScope.settings.language.id);
+    $translate.use($rootScope.settings.language.id);
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        cordova.plugins.Keyboard.disableScroll(true);
+        cordova.plugins.Keyboard.disableScroll(true);        
 
+        FirebaseService.setUuid($cordovaDevice.getUUID());
+
+        FCMPlugin.getToken(function (token) {
+          FirebaseService.setToken(token);
+        });
+
+        FCMPlugin.onNotification((data) => {
+          if (data.wasTapped) {
+            alert(JSON.stringify(data.message));
+          } else {
+            alert(JSON.stringify(data.message));
+          }
+        });
       }
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
@@ -17,7 +30,7 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
       }
     });
   })
-  .config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $translateProvider ) {
+  .config(function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $translateProvider) {
     localStorageServiceProvider
       .setPrefix('IonicEthereumWallet2')
       .setStorageType('localStorage');
@@ -95,12 +108,12 @@ var app = angular.module('app', ['ionic', 'ion-floating-menu', 'LocalStorageModu
         }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/wallets');   
+    $urlRouterProvider.otherwise('/tab/wallets');
 
-    $translateProvider.useStaticFilesLoader({   
-      prefix: 'traslations/',             
-      suffix: '.json'                           
-    });  
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'traslations/',
+      suffix: '.json'
+    });
     $translateProvider.preferredLanguage('en');
   });
 

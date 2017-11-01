@@ -175,3 +175,9 @@ i.btn-right{
     border: 1px solid white;
     text-align: center;
 }
+
+.toggle-notification{
+    position: absolute !important;
+    right: 15px !important;
+    top: 8px !important;
+}

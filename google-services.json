@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "374752254097",
+    "firebase_url": "https://fcm-starter-e6fb1.firebaseio.com",
+    "project_id": "fcm-starter-e6fb1",
+    "storage_bucket": "fcm-starter-e6fb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374752254097:android:8800488925a23d34",
+        "android_client_info": {
+          "package_name": "com.megatone.ionic.ethereum.wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374752254097-v14gbru3ssunmpa254m9qj7356jnpp7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJWM2sB4YojThn0sCyzJAZFUspVA4jDAw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
